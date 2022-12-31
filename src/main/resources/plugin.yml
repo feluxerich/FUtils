@@ -1,0 +1,14 @@
+name: FUtils
+version: '${project.version}'
+main: dev.fluxi.futils.FUtils
+api-version: 1.19
+website: https://fluxi.dev/
+commands:
+  vanish:
+    permission: futils.vanish
+    usage: /vanish <player>
+    description: Hide yourself or another player
+  heal:
+    permission: futils.heal
+    usage: /heal <player>
+    description: Reset the vitals of yourself or of all players
