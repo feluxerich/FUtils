@@ -2,7 +2,8 @@ package dev.fluxi.futils.utils;
 
 import dev.fluxi.futils.FUtils;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -47,10 +48,16 @@ public class Timer {
     public void sendActionBar() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (!isRunning()) {
-                player.sendActionBar(Component.text().append(Component.text(prettifyTime(), NamedTextColor.BLUE)).build());
+                player.sendActionBar(Component.text()
+                        .append(Component.text(prettifyTime()))
+                        .color(TextColor.fromHexString("#7866ff"))
+                        .decorate(TextDecoration.BOLD).build());
                 continue;
             }
-            player.sendActionBar(Component.text().append(Component.text(prettifyTime(), NamedTextColor.LIGHT_PURPLE)).build());
+            player.sendActionBar(Component.text()
+                    .append(Component.text(prettifyTime()))
+                    .color(TextColor.fromHexString("#5b45ff"))
+                    .decorate(TextDecoration.BOLD).build());
         }
     }
 
@@ -78,7 +85,7 @@ public class Timer {
 
         int seconds = time % 60;
         int minutes = (time % 3600) / 60;
-        int hours = (time % 86400 ) / 3600;
+        int hours = (time % 86400) / 3600;
         int days = time / 86400;
 
         return String.format("%02d:%02d:%02d:%02d", days, hours, minutes, seconds);
