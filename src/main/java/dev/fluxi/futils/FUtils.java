@@ -4,7 +4,7 @@ import dev.fluxi.futils.commands.*;
 import dev.fluxi.futils.listeners.JoinListener;
 import dev.fluxi.futils.listeners.PlayerInteractEntityListener;
 import dev.fluxi.futils.utils.Timer;
-import dev.fluxi.futils.utils.ChallengeManager;
+import dev.fluxi.futils.utils.challenge.ChallengeManager;
 import dev.fluxi.futils.utils.VanishManager;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;

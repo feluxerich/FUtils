@@ -1,16 +1,18 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.utils.Challenge;
-import org.bukkit.Material;
+import dev.fluxi.futils.utils.challenge.Challenge;
+import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.inventory.ItemStack;
+
+import java.util.Objects;
 
 public class UltraHardcore extends Challenge {
     public UltraHardcore() {
-        challengeItem = new ItemStack(Material.GOLDEN_APPLE);
         challengeName = "UltraHardcore";
+        Objects.requireNonNull(Bukkit.getWorld("world")).setGameRule(GameRule.NATURAL_REGENERATION, false);
     }
 
     @EventHandler

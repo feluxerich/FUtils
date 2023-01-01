@@ -42,5 +42,6 @@ public class HealCommand implements CommandExecutor, TabCompleter {
     private void healPlayer(Player player) {
         player.setHealth(20d);
         player.setFoodLevel(20);
+        player.setSaturation(20);
     }
 }
