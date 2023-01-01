@@ -12,3 +12,13 @@ commands:
     permission: futils.heal
     usage: /heal <player>
     description: Reset the vitals of yourself or of all players
+  challenge:
+    permission: futils.challenge
+    usage: /challenge <operation> <challenge>
+    description: Start, pause or stop a challenge
+    aliases:
+      - c
+  timer:
+    permission: futils.timer
+    usage: /timer <operation>
+    description: Use a timer in players actionbar
