@@ -38,6 +38,7 @@ public class Challenge implements Listener {
         FUtils.getInstance().unregisterEvent(this);
         FUtils.getInstance().getChallengeManager().setActiveChallenge(null);
         FUtils.getInstance().getTimer().setRunning(false);
+        FUtils.getInstance().getTimer().setTime(0);
         FUtils.getInstance().getTimer().setHidden(true);
         return this;
     }
