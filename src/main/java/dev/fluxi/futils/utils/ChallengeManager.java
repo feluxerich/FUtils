@@ -1,5 +1,6 @@
 package dev.fluxi.futils.utils;
 
+import dev.fluxi.futils.challenges.AdvancementDamage;
 import dev.fluxi.futils.challenges.SharedHearts;
 import dev.fluxi.futils.challenges.UltraHardcore;
 import dev.fluxi.futils.challenges.UltraUltraHardcore;
@@ -20,6 +21,7 @@ public class ChallengeManager {
         challenges.add(new UltraHardcore());
         challenges.add(new UltraUltraHardcore());
         challenges.add(new SharedHearts());
+        challenges.add(new AdvancementDamage());
     }
 
     public List<String> getChallengeNames() {
