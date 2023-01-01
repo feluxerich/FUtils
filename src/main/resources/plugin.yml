@@ -22,3 +22,7 @@ commands:
     permission: futils.timer
     usage: /timer <operation>
     description: Use a timer in players actionbar
+  reset:
+    permission: futils.reset
+    usage: /reset <confirm>
+    description: Reset the world on this server
