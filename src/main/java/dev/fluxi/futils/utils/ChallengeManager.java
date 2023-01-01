@@ -2,12 +2,9 @@ package dev.fluxi.futils.utils;
 
 import dev.fluxi.futils.challenges.UltraHardcore;
 import dev.fluxi.futils.challenges.UltraUltraHardcore;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ChallengeManager {
 
@@ -33,9 +30,8 @@ public class ChallengeManager {
         return challengeNames;
     }
 
-    public Challenge getChallenge(String name, Player player) {
+    public Challenge getChallenge(String name) {
         for (Challenge challenge : challenges) {
-            player.sendMessage(challenge.challengeName);
             if (!name.equalsIgnoreCase(challenge.challengeName)) {
                 continue;
             }
