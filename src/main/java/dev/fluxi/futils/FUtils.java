@@ -11,15 +11,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public final class FUtils extends JavaPlugin {
+public final class FUtils extends JavaPlugin implements Listener {
     private static FUtils instance;
     private VanishManager vanishManager;
     private ChallengeManager challengeManager;
@@ -54,7 +56,6 @@ public final class FUtils extends JavaPlugin {
     public void onEnable() {
         instance = this;
         vanishManager = new VanishManager(this);
-        challengeManager = new ChallengeManager();
         timer = new Timer(false, 0);
 
         config.addDefault("reset", false);
@@ -65,8 +66,9 @@ public final class FUtils extends JavaPlugin {
         registerEvents();
     }
 
-    @Override
-    public void onDisable() {
+    @EventHandler
+    public void onWorldLoad(WorldLoadEvent event) {
+        challengeManager = new ChallengeManager();
     }
 
     private void registerCommands() {

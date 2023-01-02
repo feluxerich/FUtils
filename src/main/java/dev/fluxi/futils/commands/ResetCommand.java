@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,6 +36,11 @@ public class ResetCommand implements CommandExecutor, TabCompleter {
         FUtils.getInstance().getConfig().set("reset", true);
         FUtils.getInstance().saveConfig();
 
+        ConfigurationSection configurationSection = Bukkit.spigot().getSpigotConfig().getConfigurationSection("settings");
+        if (configurationSection == null || configurationSection.get("restart-script") == null) {
+            Bukkit.shutdown();
+            return true;
+        }
         Bukkit.spigot().restart();
         return true;
     }
