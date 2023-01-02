@@ -1,11 +1,14 @@
 package dev.fluxi.futils;
 
+import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
 import dev.fluxi.futils.commands.*;
 import dev.fluxi.futils.listeners.JoinListener;
 import dev.fluxi.futils.listeners.PlayerInteractEntityListener;
 import dev.fluxi.futils.utils.Timer;
 import dev.fluxi.futils.utils.challenge.ChallengeManager;
 import dev.fluxi.futils.utils.VanishManager;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -71,6 +74,17 @@ public final class FUtils extends JavaPlugin implements Listener {
         challengeManager = new ChallengeManager();
     }
 
+    @EventHandler
+    public void onServerListPing(PaperServerListPingEvent event) {
+        if (challengeManager.getRunning()) {
+            event.motd(Component.text("Challenge running with " + event.getNumPlayers() + " players")
+                    .color(TextColor.fromHexString("#5b45ff")));
+            return;
+        }
+        event.motd(Component.text("No Challenge running")
+                .color(TextColor.fromHexString("#7866ff")));
+    }
+
     private void registerCommands() {
         registerCommand("vanish", new VanishCommand(), new VanishCommand());
         registerCommand("heal", new HealCommand(), new HealCommand());
@@ -87,6 +101,7 @@ public final class FUtils extends JavaPlugin implements Listener {
     private void registerEvents() {
         registerEvent(new JoinListener());
         registerEvent(new PlayerInteractEntityListener());
+        registerEvent(this);
     }
 
     public void registerEvent(Listener listener) {

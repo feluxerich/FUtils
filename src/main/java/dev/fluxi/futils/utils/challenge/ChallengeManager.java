@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ChallengeManager {
     List<Challenge> challenges = new ArrayList<>();
+    Boolean isRunning = false;
 
     public ChallengeManager() {
         registerChallenges();
@@ -64,6 +65,7 @@ public class ChallengeManager {
         }
         FUtils.getInstance().getTimer().setRunning(true);
         FUtils.getInstance().getTimer().setHidden(false);
+        isRunning = true;
     }
 
     public void stop () {
@@ -77,6 +79,7 @@ public class ChallengeManager {
         FUtils.getInstance().getTimer().setRunning(false);
         FUtils.getInstance().getTimer().setHidden(true);
         FUtils.getInstance().getTimer().setTime(0);
+        isRunning = false;
     }
 
     public void pause() {
@@ -84,6 +87,7 @@ public class ChallengeManager {
             return;
         }
         FUtils.getInstance().getTimer().setRunning(false);
+        isRunning = false;
     }
 
     public void resume() {
@@ -91,5 +95,10 @@ public class ChallengeManager {
             return;
         }
         FUtils.getInstance().getTimer().setRunning(true);
+        isRunning = true;
+    }
+
+    public Boolean getRunning() {
+        return isRunning;
     }
 }
