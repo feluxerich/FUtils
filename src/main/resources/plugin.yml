@@ -3,6 +3,9 @@ version: '${project.version}'
 main: dev.fluxi.futils.FUtils
 api-version: 1.19
 website: https://fluxi.dev/
+description: The only Minecraft plugin you need
+author: feluxerich
+load: STARTUP
 commands:
   vanish:
     permission: futils.vanish
