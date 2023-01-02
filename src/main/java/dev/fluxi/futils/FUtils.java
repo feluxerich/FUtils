@@ -11,6 +11,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -72,6 +73,7 @@ public final class FUtils extends JavaPlugin implements Listener {
     @EventHandler
     public void onWorldLoad(WorldLoadEvent event) {
         challengeManager = new ChallengeManager();
+        event.getWorld().setGameRule(GameRule.SPAWN_RADIUS, 0);
     }
 
     @EventHandler

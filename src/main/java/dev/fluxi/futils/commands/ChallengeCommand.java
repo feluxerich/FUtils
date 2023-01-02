@@ -5,6 +5,7 @@ import dev.fluxi.futils.utils.challenge.Challenge;
 import dev.fluxi.futils.utils.challenge.ChallengeManager;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -63,6 +64,10 @@ public class ChallengeCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(ChatColor.GREEN + challenge.challengeName + " disabled");
                 break;
             }
+            case "gamemode":
+            case "gm":
+                challengeManager.gameMode(GameMode.SURVIVAL);
+                break;
             default: return false;
         }
         return true;
@@ -71,7 +76,7 @@ public class ChallengeCommand implements CommandExecutor, TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 1) {
-            return Arrays.asList("start", "stop", "pause", "resume", "active", "enable", "disable");
+            return Arrays.asList("start", "stop", "pause", "resume", "active", "enable", "disable", "gamemode", "gm");
         }
         return FUtils.getInstance().getChallengeManager().getChallengeNames();
     }

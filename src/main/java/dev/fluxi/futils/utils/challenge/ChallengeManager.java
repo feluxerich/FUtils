@@ -1,10 +1,10 @@
 package dev.fluxi.futils.utils.challenge;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.challenges.AdvancementDamage;
-import dev.fluxi.futils.challenges.SharedDamage;
-import dev.fluxi.futils.challenges.UltraHardcore;
-import dev.fluxi.futils.challenges.UltraUltraHardcore;
+import dev.fluxi.futils.challenges.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,7 @@ public class ChallengeManager {
         challenges.add(new UltraUltraHardcore());
         challenges.add(new AdvancementDamage());
         challenges.add(new SharedDamage());
+        challenges.add(new LevelBorder());
     }
 
     public List<String> getChallengeNames() {
@@ -96,6 +97,12 @@ public class ChallengeManager {
         }
         FUtils.getInstance().getTimer().setRunning(true);
         isRunning = true;
+    }
+
+    public void gameMode(GameMode gameMode) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.setGameMode(gameMode);
+        }
     }
 
     public Boolean getRunning() {
