@@ -65,6 +65,10 @@ public final class FUtils extends JavaPlugin implements Listener {
         config.options().copyDefaults(true);
         saveConfig();
 
+        if (challengeManager == null) {
+            challengeManager = new ChallengeManager();
+        }
+
         registerCommands();
         registerEvents();
     }
