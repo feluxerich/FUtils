@@ -1,14 +1,18 @@
 package dev.fluxi.futils.utils;
 
+import dev.fluxi.futils.FUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VanishManager {
+public class VanishManager implements Listener {
     private final Plugin plugin;
     private final List<Player> vanished;
 
@@ -42,5 +46,11 @@ public class VanishManager {
 
     public void vanishAll(Player player) {
         vanished.forEach(vanishedPlayer -> player.hidePlayer(plugin, vanishedPlayer));
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        VanishManager vanishManager = FUtils.getInstance().getVanishManager();
+        vanishManager.vanishAll(event.getPlayer());
     }
 }

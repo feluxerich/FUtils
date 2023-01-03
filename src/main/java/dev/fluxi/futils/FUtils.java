@@ -2,7 +2,6 @@ package dev.fluxi.futils;
 
 import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
 import dev.fluxi.futils.commands.*;
-import dev.fluxi.futils.listeners.JoinListener;
 import dev.fluxi.futils.listeners.PlayerInteractEntityListener;
 import dev.fluxi.futils.utils.Timer;
 import dev.fluxi.futils.utils.challenge.ChallengeManager;
@@ -101,7 +100,7 @@ public final class FUtils extends JavaPlugin implements Listener {
     }
 
     private void registerEvents() {
-        registerEvent(new JoinListener());
+        registerEvent(vanishManager);
         registerEvent(new PlayerInteractEntityListener());
         registerEvent(this);
     }
