@@ -23,10 +23,10 @@ public class LevelBorder extends Challenge {
 
     @EventHandler
     public void onPlayerLevelChange(PlayerLevelChangeEvent event) {
-        if (event.getOldLevel() + 1 < worldBorder.getSize() && worldBorder.getSize() > 1 || event.getOldLevel() > event.getNewLevel()) {
+        if (event.getOldLevel() > event.getNewLevel()) {
             return;
         }
-        worldBorder.setSize(event.getNewLevel() + 1, 2);
+        worldBorder.setSize(worldBorder.getSize() + event.getNewLevel() - event.getOldLevel() + 1, 2);
     }
 
     @Override
