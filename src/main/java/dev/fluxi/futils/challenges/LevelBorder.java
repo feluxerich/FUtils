@@ -17,7 +17,6 @@ public class LevelBorder extends Challenge {
         World world = Objects.requireNonNull(Bukkit.getWorld("world"));
         this.spawn = world.getSpawnLocation();
         this.worldBorder = world.getWorldBorder();
-
     }
 
     @EventHandler

@@ -23,6 +23,7 @@ public class ChallengeManager {
         challenges.add(new AdvancementDamage());
         challenges.add(new SharedDamage());
         challenges.add(new LevelBorder());
+        challenges.add(new OldPvP());
     }
 
     public List<Challenge> getActiveChallenges() {
