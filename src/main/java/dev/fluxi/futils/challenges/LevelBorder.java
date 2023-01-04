@@ -3,6 +3,7 @@ package dev.fluxi.futils.challenges;
 import dev.fluxi.futils.utils.challenge.Challenge;
 import org.bukkit.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 
 import java.util.Objects;
@@ -24,7 +25,12 @@ public class LevelBorder extends Challenge {
         if (event.getOldLevel() > event.getNewLevel()) {
             return;
         }
-        worldBorder.setSize(worldBorder.getSize() + event.getNewLevel() - event.getOldLevel() + 1, 2);
+        worldBorder.setSize(worldBorder.getSize() + event.getNewLevel() - event.getOldLevel(), 2);
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        event.setShouldDropExperience(false);
     }
 
     @Override
