@@ -1,10 +1,7 @@
 package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.utils.challenge.Challenge;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.WorldBorder;
+import org.bukkit.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 
@@ -15,6 +12,7 @@ public class LevelBorder extends Challenge {
     WorldBorder worldBorder;
     public LevelBorder() {
         challengeName = "LevelBorder";
+        challengeItemMaterial = Material.EXPERIENCE_BOTTLE;
         World world = Objects.requireNonNull(Bukkit.getWorld("world"));
         this.spawn = world.getSpawnLocation();
         this.worldBorder = world.getWorldBorder();

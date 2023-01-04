@@ -65,10 +65,6 @@ public final class FUtils extends JavaPlugin implements Listener {
         config.options().copyDefaults(true);
         saveConfig();
 
-        if (challengeManager == null) {
-            challengeManager = new ChallengeManager();
-        }
-
         registerCommands();
         registerEvents();
     }
@@ -81,7 +77,7 @@ public final class FUtils extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onServerListPing(PaperServerListPingEvent event) {
-        if (challengeManager.getRunning()) {
+        if (challengeManager.isRunning()) {
             event.motd(Component.text("Challenge running with " + event.getNumPlayers() + " players")
                     .color(TextColor.fromHexString("#5b45ff")));
             return;
@@ -98,7 +94,7 @@ public final class FUtils extends JavaPlugin implements Listener {
         registerCommand("reset", new ResetCommand(), new ResetCommand());
     }
 
-    private void registerCommand(String name, CommandExecutor commandExecutor, TabCompleter tabCompleter) {
+    public void registerCommand(String name, CommandExecutor commandExecutor, TabCompleter tabCompleter) {
         Objects.requireNonNull(getCommand(name)).setExecutor(commandExecutor);
         Objects.requireNonNull(getCommand(name)).setTabCompleter(tabCompleter);
     }

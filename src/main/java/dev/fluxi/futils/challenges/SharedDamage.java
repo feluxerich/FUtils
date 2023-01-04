@@ -2,6 +2,7 @@ package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.utils.challenge.Challenge;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -9,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class SharedDamage extends Challenge {
     public SharedDamage() {
         challengeName = "SharedDamage";
+        challengeItemMaterial = Material.CHAIN;
     }
 
     @EventHandler

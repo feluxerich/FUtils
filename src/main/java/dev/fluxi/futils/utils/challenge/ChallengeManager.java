@@ -25,30 +25,10 @@ public class ChallengeManager {
         challenges.add(new LevelBorder());
     }
 
-    public List<String> getChallengeNames() {
-        List<String> challengeNames = new ArrayList<>();
-
-        for (Challenge challenge : challenges) {
-            challengeNames.add(challenge.getChallengeName());
-        }
-
-        return challengeNames;
-    }
-
-    public Challenge getChallenge(String name) {
-        for (Challenge challenge : challenges) {
-            if (!name.equalsIgnoreCase(challenge.challengeName)) {
-                continue;
-            }
-            return challenge;
-        }
-        return null;
-    }
-
     public List<Challenge> getActiveChallenges() {
         List<Challenge> activeChallenges = new ArrayList<>();
         for (Challenge challenge : challenges) {
-            if (!challenge.isActive()) {
+            if (challenge == null || !challenge.isActive()) {
                 continue;
             }
             activeChallenges.add(challenge);
@@ -58,12 +38,13 @@ public class ChallengeManager {
 
     public void start() {
         List<Challenge> activeChallenges = getActiveChallenges();
-        if (activeChallenges.isEmpty()) {
+        if (activeChallenges.isEmpty() || isRunning()) {
             return;
         }
         for (Challenge activeChallenge : activeChallenges) {
             activeChallenge.enable();
         }
+        FUtils.getInstance().getTimer().setTime(0);
         FUtils.getInstance().getTimer().setRunning(true);
         FUtils.getInstance().getTimer().setHidden(false);
         isRunning = true;
@@ -71,11 +52,12 @@ public class ChallengeManager {
 
     public void stop () {
         List<Challenge> activeChallenges = getActiveChallenges();
-        if (activeChallenges.isEmpty() || !FUtils.getInstance().getTimer().isRunning()) {
+        if (activeChallenges.isEmpty() || !isRunning()) {
             return;
         }
         for (Challenge activeChallenge : activeChallenges) {
             activeChallenge.disable();
+            activeChallenge.setActive(false);
         }
         FUtils.getInstance().getTimer().setRunning(false);
         FUtils.getInstance().getTimer().setHidden(true);
@@ -105,7 +87,11 @@ public class ChallengeManager {
         }
     }
 
-    public Boolean getRunning() {
+    public Boolean isRunning() {
         return isRunning;
+    }
+
+    public List<Challenge> getChallenges() {
+        return challenges;
     }
 }
