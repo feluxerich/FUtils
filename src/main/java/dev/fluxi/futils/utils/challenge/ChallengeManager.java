@@ -2,8 +2,11 @@ package dev.fluxi.futils.utils.challenge;
 
 import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.challenges.*;
+import dev.fluxi.futils.utils.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -11,10 +14,22 @@ import java.util.List;
 
 public class ChallengeManager {
     List<Challenge> challenges = new ArrayList<>();
-    Boolean isRunning = false;
+    FileConfiguration configuration = FUtils.getInstance().getConfig();
+    Timer timer = FUtils.getInstance().getTimer();
 
     public ChallengeManager() {
         registerChallenges();
+        getConfig();
+    }
+
+    private Challenge getChallenge(String name) {
+        for (Challenge challenge : challenges) {
+            if (!challenge.challengeName.equals(name)) {
+                continue;
+            }
+            return challenge;
+        }
+        return null;
     }
 
     private void registerChallenges() {
@@ -24,6 +39,42 @@ public class ChallengeManager {
         challenges.add(new SharedDamage());
         challenges.add(new LevelBorder());
         challenges.add(new OldPvP());
+    }
+
+    private ConfigurationSection getConfigSection() {
+        if (!configuration.isConfigurationSection("challenge")) {
+            return configuration.createSection("challenge");
+        }
+        return configuration.getConfigurationSection("challenge");
+    }
+
+    private void getConfig() {
+        ConfigurationSection section = getConfigSection();
+        List<?> active = section.getList("active");
+
+        if (active == null) {
+            return;
+        }
+        for (Object activeChallenge : active) {
+            Challenge challenge = getChallenge(((Challenge) activeChallenge).challengeName);
+            if (challenge == null) {
+                continue;
+            }
+            challenge.setActive(true);
+        }
+    }
+
+    public void setConfig() {
+        ConfigurationSection section = getConfigSection();
+        List<String> activeChallengeNames = new ArrayList<>();
+        for (Challenge challenge : getActiveChallenges()) {
+            if (activeChallengeNames.contains(challenge.challengeName)) {
+                continue;
+            }
+            activeChallengeNames.add(challenge.challengeName);
+        }
+        section.set("active", activeChallengeNames);
+        FUtils.getInstance().saveConfig();
     }
 
     public List<Challenge> getActiveChallenges() {
@@ -45,13 +96,12 @@ public class ChallengeManager {
         for (Challenge activeChallenge : activeChallenges) {
             activeChallenge.enable();
         }
-        FUtils.getInstance().getTimer().setTime(0);
-        FUtils.getInstance().getTimer().setRunning(true);
-        FUtils.getInstance().getTimer().setHidden(false);
-        isRunning = true;
+        timer.setTime(0);
+        timer.setRunning(true);
+        timer.setHidden(false);
     }
 
-    public void stop () {
+    public void stop() {
         List<Challenge> activeChallenges = getActiveChallenges();
         if (activeChallenges.isEmpty() || !isRunning()) {
             return;
@@ -60,26 +110,23 @@ public class ChallengeManager {
             activeChallenge.disable();
             activeChallenge.setActive(false);
         }
-        FUtils.getInstance().getTimer().setRunning(false);
-        FUtils.getInstance().getTimer().setHidden(true);
-        FUtils.getInstance().getTimer().setTime(0);
-        isRunning = false;
+        timer.setRunning(false);
+        timer.setHidden(true);
+        timer.setTime(0);
     }
 
     public void pause() {
         if (!FUtils.getInstance().getTimer().isRunning()) {
             return;
         }
-        FUtils.getInstance().getTimer().setRunning(false);
-        isRunning = false;
+        timer.setRunning(false);
     }
 
     public void resume() {
         if (FUtils.getInstance().getTimer().isRunning()) {
             return;
         }
-        FUtils.getInstance().getTimer().setRunning(true);
-        isRunning = true;
+        timer.setRunning(true);
     }
 
     public void gameMode(GameMode gameMode) {
@@ -89,7 +136,7 @@ public class ChallengeManager {
     }
 
     public Boolean isRunning() {
-        return isRunning;
+        return timer.isRunning();
     }
 
     public List<Challenge> getChallenges() {
