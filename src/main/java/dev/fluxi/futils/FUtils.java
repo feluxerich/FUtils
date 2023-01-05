@@ -11,6 +11,7 @@ import net.kyori.adventure.text.format.TextColor;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
+import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -63,6 +64,10 @@ public final class FUtils extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         vanishManager = new VanishManager(this);
+        World world = Bukkit.getWorld("world");
+        if (world != null) {
+            challengeManager = new ChallengeManager();
+        }
         timer = new Timer(false, 0);
 
         config.addDefault("reset", false);
@@ -75,9 +80,11 @@ public final class FUtils extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onWorldLoad(WorldLoadEvent event) {
-        challengeManager = new ChallengeManager();
         event.getWorld().setGameRule(GameRule.SPAWN_RADIUS, 0);
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        if (challengeManager == null) {
+            challengeManager = new ChallengeManager();
+        }
         if (scoreboard.getObjective("health") == null) {
             scoreboard.registerNewObjective("health", Criteria.HEALTH, Component.text("Health"), RenderType.HEARTS)
                     .setDisplaySlot(DisplaySlot.PLAYER_LIST);
@@ -86,6 +93,9 @@ public final class FUtils extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onServerListPing(PaperServerListPingEvent event) {
+        if (challengeManager == null) {
+            return;
+        }
         if (challengeManager.isRunning()) {
             event.motd(Component.text("Challenge running with " + event.getNumPlayers() + " players")
                     .color(TextColor.fromHexString("#5b45ff")));

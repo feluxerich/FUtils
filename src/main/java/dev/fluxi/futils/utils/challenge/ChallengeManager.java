@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class ChallengeManager {
     List<Challenge> challenges = new ArrayList<>();
@@ -57,11 +58,12 @@ public class ChallengeManager {
             return;
         }
         for (Object activeChallenge : active) {
-            Challenge challenge = getChallenge(((Challenge) activeChallenge).challengeName);
+            Challenge challenge = getChallenge((String) activeChallenge);
             if (challenge == null) {
                 continue;
             }
             challenge.setActive(true);
+            FUtils.getInstance().getLogger().log(Level.INFO, "Activated Challenge: " + challenge.challengeName);
         }
         if (!section.isSet("running")) {
             isRunning = false;
@@ -94,6 +96,7 @@ public class ChallengeManager {
     }
 
     public void start() {
+        setConfig();
         List<Challenge> activeChallenges = getActiveChallenges();
         if (activeChallenges.isEmpty() || isRunning()) {
             return;
@@ -104,9 +107,11 @@ public class ChallengeManager {
         timer.setTime(0);
         timer.setRunning(true);
         timer.setHidden(false);
+        isRunning = true;
     }
 
     public void stop() {
+        setConfig();
         List<Challenge> activeChallenges = getActiveChallenges();
         if (activeChallenges.isEmpty() || !isRunning()) {
             return;
@@ -118,20 +123,25 @@ public class ChallengeManager {
         timer.setRunning(false);
         timer.setHidden(true);
         timer.setTime(0);
+        isRunning = false;
     }
 
     public void pause() {
+        setConfig();
         if (!isRunning()) {
             return;
         }
         timer.setRunning(false);
+        isRunning = false;
     }
 
     public void resume() {
+        setConfig();
         if (isRunning()) {
             return;
         }
         timer.setRunning(true);
+        isRunning = true;
     }
 
     public void gameMode(GameMode gameMode) {
