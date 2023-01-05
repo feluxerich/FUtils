@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -46,6 +47,7 @@ public class Gui implements Listener {
             itemMeta.lore(lore);
         }
         item.setItemMeta(itemMeta);
+        item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         return item;
     }
 

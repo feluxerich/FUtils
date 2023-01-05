@@ -10,8 +10,8 @@ import java.util.Objects;
 public class UltraHardcore extends Challenge {
     World world;
     public UltraHardcore() {
-        challengeName = "UltraHardcore";
-        challengeItemMaterial = Material.GOLDEN_APPLE;
+        name("UltraHardcore");
+        itemMaterial(Material.GOLDEN_APPLE);
         this.world = Objects.requireNonNull(Bukkit.getWorld("world"));
     }
 

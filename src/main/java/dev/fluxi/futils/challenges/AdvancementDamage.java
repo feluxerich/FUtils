@@ -7,8 +7,8 @@ import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
 public class AdvancementDamage extends Challenge {
     public AdvancementDamage() {
-        challengeName = "AdvancementDamage";
-        challengeItemMaterial = Material.KNOWLEDGE_BOOK;
+        name("AdvancementDamage");
+        itemMaterial(Material.KNOWLEDGE_BOOK);
     }
 
     @EventHandler

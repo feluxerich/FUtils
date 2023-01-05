@@ -6,29 +6,26 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer {
-    private boolean isRunning;
-    private int time;
+    private int time = 0;
+    private boolean isRunning = false;
     private boolean isHidden = true;
-    FileConfiguration configuration = FUtils.getInstance().getConfig();
 
-    public Timer(boolean isRunning, int time) {
-        this.isRunning = isRunning;
-        this.time = time;
+    public Timer() {
         getConfig();
         run();
     }
 
     private ConfigurationSection getConfigSection() {
-        if (!configuration.isConfigurationSection("timer")) {
-            return configuration.createSection("timer");
+        if (!FUtils.getInstance().getConfig().isConfigurationSection("timer")) {
+            return FUtils.getInstance().getConfig().createSection("timer");
         }
-        return configuration.getConfigurationSection("timer");
+        return FUtils.getInstance().getConfig().getConfigurationSection("timer");
     }
+
     private void getConfig() {
         ConfigurationSection section = getConfigSection();
         if (section.isSet("time")) {
@@ -54,10 +51,9 @@ public class Timer {
         return isRunning;
     }
 
-    public Timer setRunning(boolean running) {
+    public void setRunning(boolean running) {
         isRunning = running;
         setConfig();
-        return this;
     }
 
     public int getTime() {
@@ -84,13 +80,13 @@ public class Timer {
                 player.sendActionBar(Component.text()
                         .append(Component.text(prettifyTime()))
                         .color(TextColor.fromHexString("#7866ff"))
-                        .decorate(TextDecoration.BOLD).build());
+                        .decorate(TextDecoration.BOLD));
                 continue;
             }
             player.sendActionBar(Component.text()
                     .append(Component.text(prettifyTime()))
                     .color(TextColor.fromHexString("#5b45ff"))
-                    .decorate(TextDecoration.BOLD).build());
+                    .decorate(TextDecoration.BOLD));
         }
     }
 
@@ -101,13 +97,10 @@ public class Timer {
                 if (isHidden()) {
                     return;
                 }
-
                 sendActionBar();
-
                 if (!isRunning()) {
                     return;
                 }
-
                 setTime(getTime() + 1);
             }
         }.runTaskTimer(FUtils.getInstance(), 20, 20);

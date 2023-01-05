@@ -12,8 +12,8 @@ public class LevelBorder extends Challenge {
     Location spawn;
     WorldBorder worldBorder;
     public LevelBorder() {
-        challengeName = "LevelBorder";
-        challengeItemMaterial = Material.EXPERIENCE_BOTTLE;
+        name("LevelBorder");
+        itemMaterial(Material.EXPERIENCE_BOTTLE);
 
         World world = Objects.requireNonNull(Bukkit.getWorld("world"));
         this.spawn = world.getSpawnLocation();

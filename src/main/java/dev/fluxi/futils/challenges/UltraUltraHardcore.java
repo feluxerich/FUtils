@@ -7,8 +7,8 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 
 public class UltraUltraHardcore extends UltraHardcore {
     public UltraUltraHardcore() {
-        challengeName = "UltraUltraHardcore";
-        challengeItemMaterial = Material.ENCHANTED_GOLDEN_APPLE;
+        name("UltraUltraHardcore");
+        itemMaterial(Material.ENCHANTED_GOLDEN_APPLE);
     }
 
     @EventHandler

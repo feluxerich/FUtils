@@ -3,26 +3,20 @@ package dev.fluxi.futils.utils;
 import dev.fluxi.futils.FUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VanishManager implements Listener {
-    private final Plugin plugin;
-    private final List<Player> vanished;
+    private final FUtils plugin = FUtils.getInstance();
+    private final List<Player> vanished = new ArrayList<>();
 
-
-    public VanishManager(Plugin plugin) {
-        this.plugin = plugin;
-        this.vanished = new ArrayList<>();
-        FUtils.getInstance().registerEvent(this);
+    public VanishManager() {
+        plugin.registerEvent(this);
     }
 
     public boolean isVanished(Player player) {
@@ -33,9 +27,9 @@ public class VanishManager implements Listener {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (isVanished(player)) {
                 onlinePlayer.showPlayer(plugin, player);
-            } else {
-                onlinePlayer.hidePlayer(plugin, player);
+                continue;
             }
+            onlinePlayer.hidePlayer(plugin, player);
         }
 
         if (isVanished(player)) {
@@ -52,16 +46,8 @@ public class VanishManager implements Listener {
     }
 
     @EventHandler
-    public void onPlayerGameModeChane(PlayerGameModeChangeEvent event) {
-        if (event.getNewGameMode() != GameMode.CREATIVE || isVanished(event.getPlayer())) {
-            return;
-        }
-        toggleVanish(event.getPlayer());
-    }
-
-    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        VanishManager vanishManager = FUtils.getInstance().getVanishManager();
+        VanishManager vanishManager = plugin.getVanishManager();
         vanishManager.vanishAll(event.getPlayer());
     }
 }

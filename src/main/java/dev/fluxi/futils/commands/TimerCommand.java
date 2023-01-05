@@ -9,8 +9,9 @@ import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TimerCommand implements CommandExecutor, TabCompleter {
     FUtils fUtils = FUtils.getInstance();
@@ -39,7 +40,8 @@ public class TimerCommand implements CommandExecutor, TabCompleter {
                 showTimerIfHidden();
                 break;
             case "reset":
-                fUtils.getTimer().setRunning(false).setTime(0);
+                fUtils.getTimer().setRunning(false);
+                fUtils.getTimer().setTime(0);
                 showTimerIfHidden();
                 break;
 
@@ -57,7 +59,7 @@ public class TimerCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        return Arrays.asList("resume", "pause", "reset", "remove");
+        return Stream.of("resume", "pause", "reset", "remove").filter(suggestion -> suggestion.startsWith(args[0])).collect(Collectors.toList());
     }
 
     private void showTimerIfHidden() {

@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VanishCommand implements CommandExecutor, TabCompleter {
     @Override
@@ -29,12 +30,10 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
             sender.sendMessage(ChatColor.RED + "You have to be a Player");
             return false;
         }
-
         if (player == null) {
             sender.sendMessage(ChatColor.RED + "This Player is not online");
             return false;
         }
-
         vanishManager.toggleVanish(player);
         return true;
     }
@@ -45,6 +44,6 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             suggestions.add(onlinePlayer.getName());
         }
-        return suggestions;
+        return suggestions.stream().filter(suggestion -> suggestion.startsWith(args[0])).collect(Collectors.toList());
     }
 }
