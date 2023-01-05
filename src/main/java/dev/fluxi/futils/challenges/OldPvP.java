@@ -14,8 +14,8 @@ public class OldPvP extends Challenge {
     public static final double oldAttackSpeed = 32;
     public static final double newAttackSpeed = 4;
     public OldPvP() {
-        challengeName = "OldPvP";
-        challengeItemMaterial = Material.DIAMOND_SWORD;
+        name("OldPvP");
+        itemMaterial(Material.DIAMOND_SWORD);
     }
 
     @EventHandler

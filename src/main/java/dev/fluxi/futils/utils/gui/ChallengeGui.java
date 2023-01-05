@@ -37,8 +37,8 @@ public class ChallengeGui extends Gui {
                 itemIndex++;
                 continue;
             }
-            items.set(itemIndex + 9, createItem(challenge.challengeItemMaterial,
-                    Component.text(challenge.challengeName).color(TextColor.fromHexString("#5b45ff")),
+            items.set(itemIndex + 9, createItem(challenge.itemMaterial(),
+                    Component.text(challenge.name()).color(TextColor.fromHexString("#5b45ff")),
                     null));
             itemIndex++;
         }

@@ -9,8 +9,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class SharedDamage extends Challenge {
     public SharedDamage() {
-        challengeName = "SharedDamage";
-        challengeItemMaterial = Material.CHAIN;
+        name("SharedDamage");
+        itemMaterial(Material.CHAIN);
     }
 
     @EventHandler

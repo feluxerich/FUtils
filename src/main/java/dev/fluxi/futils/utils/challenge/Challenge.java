@@ -5,8 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.event.Listener;
 
 public class Challenge implements Listener {
-    public String challengeName = "";
-    public Material challengeItemMaterial = Material.BARRIER;
+    private String name = "";
+    private Material itemMaterial = Material.BARRIER;
     private boolean isActive = false;
 
     public boolean isActive() {
@@ -23,5 +23,21 @@ public class Challenge implements Listener {
 
     public void disable() {
         FUtils.getInstance().unregisterEvent(this);
+    }
+
+    public String name() {
+        return name;
+    }
+
+    public void name(String name) {
+        this.name = name;
+    }
+
+    public Material itemMaterial() {
+        return itemMaterial;
+    }
+
+    public void itemMaterial(Material itemMaterial) {
+        this.itemMaterial = itemMaterial;
     }
 }

@@ -6,7 +6,6 @@ import dev.fluxi.futils.utils.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -14,10 +13,9 @@ import java.util.List;
 import java.util.logging.Level;
 
 public class ChallengeManager {
-    List<Challenge> challenges = new ArrayList<>();
-    FileConfiguration configuration = FUtils.getInstance().getConfig();
-    Timer timer = FUtils.getInstance().getTimer();
-    boolean isRunning = false;
+    private final List<Challenge> challenges = new ArrayList<>();
+    private final Timer timer = FUtils.getInstance().getTimer();
+    private boolean isRunning = false;
 
     public ChallengeManager() {
         registerChallenges();
@@ -26,7 +24,7 @@ public class ChallengeManager {
 
     private Challenge getChallenge(String name) {
         for (Challenge challenge : challenges) {
-            if (!challenge.challengeName.equals(name)) {
+            if (!challenge.name().equals(name)) {
                 continue;
             }
             return challenge;
@@ -44,10 +42,10 @@ public class ChallengeManager {
     }
 
     private ConfigurationSection getConfigSection() {
-        if (!configuration.isConfigurationSection("challenge")) {
-            return configuration.createSection("challenge");
+        if (!FUtils.getInstance().getConfig().isConfigurationSection("challenge")) {
+            return FUtils.getInstance().getConfig().createSection("challenge");
         }
-        return configuration.getConfigurationSection("challenge");
+        return FUtils.getInstance().getConfig().getConfigurationSection("challenge");
     }
 
     private void getConfig() {
@@ -63,22 +61,22 @@ public class ChallengeManager {
                 continue;
             }
             challenge.setActive(true);
-            FUtils.getInstance().getLogger().log(Level.INFO, "Activated Challenge: " + challenge.challengeName);
+            FUtils.getInstance().getLogger().log(Level.INFO, "Activated Challenge: " + challenge.name());
         }
         if (!section.isSet("running")) {
-            isRunning = false;
+            setRunning(false);
         }
-        isRunning = section.getBoolean("running");
+        setRunning(section.getBoolean("running"));
     }
 
     public void setConfig() {
         ConfigurationSection section = getConfigSection();
         List<String> activeChallengeNames = new ArrayList<>();
         for (Challenge challenge : getActiveChallenges()) {
-            if (activeChallengeNames.contains(challenge.challengeName)) {
+            if (activeChallengeNames.contains(challenge.name())) {
                 continue;
             }
-            activeChallengeNames.add(challenge.challengeName);
+            activeChallengeNames.add(challenge.name());
         }
         section.set("active", activeChallengeNames);
         FUtils.getInstance().saveConfig();
@@ -107,7 +105,7 @@ public class ChallengeManager {
         timer.setTime(0);
         timer.setRunning(true);
         timer.setHidden(false);
-        isRunning = true;
+        setRunning(false);
     }
 
     public void stop() {
@@ -123,7 +121,7 @@ public class ChallengeManager {
         timer.setRunning(false);
         timer.setHidden(true);
         timer.setTime(0);
-        isRunning = false;
+        setRunning(false);
     }
 
     public void pause() {
@@ -132,7 +130,7 @@ public class ChallengeManager {
             return;
         }
         timer.setRunning(false);
-        isRunning = false;
+        setRunning(true);
     }
 
     public void resume() {
@@ -141,7 +139,7 @@ public class ChallengeManager {
             return;
         }
         timer.setRunning(true);
-        isRunning = true;
+        setRunning(true);
     }
 
     public void gameMode(GameMode gameMode) {
@@ -150,8 +148,13 @@ public class ChallengeManager {
         }
     }
 
-    public Boolean isRunning() {
+    public boolean isRunning() {
         return isRunning;
+    }
+
+    public void setRunning(boolean isRunning) {
+        this.isRunning = isRunning;
+        setConfig();
     }
 
     public List<Challenge> getChallenges() {
