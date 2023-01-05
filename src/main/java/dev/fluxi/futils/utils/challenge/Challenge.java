@@ -15,7 +15,6 @@ public class Challenge implements Listener {
 
     public void setActive(boolean active) {
         isActive = active;
-        FUtils.getInstance().getChallengeManager().setConfig();
     }
 
     public void enable() {
