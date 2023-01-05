@@ -16,6 +16,7 @@ public class ChallengeManager {
     List<Challenge> challenges = new ArrayList<>();
     FileConfiguration configuration = FUtils.getInstance().getConfig();
     Timer timer = FUtils.getInstance().getTimer();
+    boolean isRunning = false;
 
     public ChallengeManager() {
         registerChallenges();
@@ -62,6 +63,10 @@ public class ChallengeManager {
             }
             challenge.setActive(true);
         }
+        if (!section.isSet("running")) {
+            isRunning = false;
+        }
+        isRunning = section.getBoolean("running");
     }
 
     public void setConfig() {
@@ -116,14 +121,14 @@ public class ChallengeManager {
     }
 
     public void pause() {
-        if (!FUtils.getInstance().getTimer().isRunning()) {
+        if (!isRunning()) {
             return;
         }
         timer.setRunning(false);
     }
 
     public void resume() {
-        if (FUtils.getInstance().getTimer().isRunning()) {
+        if (isRunning()) {
             return;
         }
         timer.setRunning(true);
@@ -136,7 +141,7 @@ public class ChallengeManager {
     }
 
     public Boolean isRunning() {
-        return timer.isRunning();
+        return isRunning;
     }
 
     public List<Challenge> getChallenges() {
