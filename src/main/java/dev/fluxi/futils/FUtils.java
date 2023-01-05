@@ -19,6 +19,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Criteria;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.RenderType;
+import org.bukkit.scoreboard.Scoreboard;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,6 +77,11 @@ public final class FUtils extends JavaPlugin implements Listener {
     public void onWorldLoad(WorldLoadEvent event) {
         challengeManager = new ChallengeManager();
         event.getWorld().setGameRule(GameRule.SPAWN_RADIUS, 0);
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        if (scoreboard.getObjective("health") == null) {
+            scoreboard.registerNewObjective("health", Criteria.HEALTH, Component.text("Health"), RenderType.HEARTS)
+                    .setDisplaySlot(DisplaySlot.PLAYER_LIST);
+        }
     }
 
     @EventHandler
