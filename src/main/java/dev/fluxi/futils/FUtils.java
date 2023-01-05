@@ -100,7 +100,6 @@ public final class FUtils extends JavaPlugin implements Listener {
     }
 
     private void registerEvents() {
-        registerEvent(vanishManager);
         registerEvent(new PlayerInteractEntityListener());
         registerEvent(this);
     }
