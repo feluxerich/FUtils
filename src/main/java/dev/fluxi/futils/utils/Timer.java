@@ -5,6 +5,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -12,12 +14,40 @@ public class Timer {
     private boolean isRunning;
     private int time;
     private boolean isHidden = true;
+    FileConfiguration configuration = FUtils.getInstance().getConfig();
 
     public Timer(boolean isRunning, int time) {
         this.isRunning = isRunning;
         this.time = time;
-
+        getConfig();
         run();
+    }
+
+    private ConfigurationSection getConfigSection() {
+        if (!configuration.isConfigurationSection("timer")) {
+            return configuration.createSection("timer");
+        }
+        return configuration.getConfigurationSection("timer");
+    }
+    private void getConfig() {
+        ConfigurationSection section = getConfigSection();
+        if (section.isSet("time")) {
+            time = section.getInt("time");
+        }
+        if (section.isSet("running")) {
+            isRunning = section.getBoolean("running");
+        }
+        if (section.isSet("hidden")) {
+            isHidden = section.getBoolean("hidden");
+        }
+    }
+
+    private void setConfig() {
+        ConfigurationSection section = getConfigSection();
+        section.set("time", time);
+        section.set("running", isRunning);
+        section.set("hidden", isHidden);
+        FUtils.getInstance().saveConfig();
     }
 
     public boolean isRunning() {
@@ -26,6 +56,7 @@ public class Timer {
 
     public Timer setRunning(boolean running) {
         isRunning = running;
+        setConfig();
         return this;
     }
 
@@ -35,6 +66,7 @@ public class Timer {
 
     public void setTime(int time) {
         this.time = time;
+        setConfig();
     }
 
     public boolean isHidden() {
@@ -43,6 +75,7 @@ public class Timer {
 
     public void setHidden(boolean hidden) {
         isHidden = hidden;
+        setConfig();
     }
 
     public void sendActionBar() {
