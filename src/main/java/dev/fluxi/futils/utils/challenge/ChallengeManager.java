@@ -105,7 +105,7 @@ public class ChallengeManager {
         timer.setTime(0);
         timer.setRunning(true);
         timer.setHidden(false);
-        setRunning(false);
+        setRunning(true);
     }
 
     public void stop() {
@@ -116,7 +116,6 @@ public class ChallengeManager {
         }
         for (Challenge activeChallenge : activeChallenges) {
             activeChallenge.disable();
-            activeChallenge.setActive(false);
         }
         timer.setRunning(false);
         timer.setHidden(true);
@@ -130,7 +129,7 @@ public class ChallengeManager {
             return;
         }
         timer.setRunning(false);
-        setRunning(true);
+        setRunning(false);
     }
 
     public void resume() {

@@ -35,8 +35,8 @@ public final class FUtils extends ExtendedPlugin implements Listener {
     @Override
     public void onEnable() {
         vanishManager = new VanishManager();
-        challengeManager = new ChallengeManager();
         timer = new Timer();
+        challengeManager = new ChallengeManager();
 
         registerCommands();
         registerEvents();

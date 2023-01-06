@@ -2,9 +2,9 @@ package dev.fluxi.futils.utils.gui;
 
 import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.utils.challenge.Challenge;
-import dev.fluxi.futils.utils.challenge.ChallengeManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.title.TitlePart;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -104,22 +104,31 @@ public class ChallengeGui extends Gui {
             renderItems();
             return;
         }
-        ChallengeManager challengeManager = FUtils.getInstance().getChallengeManager();
+        FUtils fUtils = FUtils.getInstance();
         switch (event.getSlot()) {
             case 21:
-                challengeManager.start();
+                fUtils.getChallengeManager().start();
+                event.getWhoClicked().sendTitlePart(TitlePart.TITLE, Component.text("Started").color(TextColor.fromHexString("#5b45ff")));
+                getInventory().close();
+                //event.getWhoClicked().playSound(Sound.);
+                // TODO: add levelup sound
                 break;
             case 22:
-                if (challengeManager.isRunning()) {
-                    challengeManager.pause();
+                if (fUtils.getChallengeManager().isRunning()) {
+                    fUtils.getChallengeManager().pause();
+                    event.getWhoClicked().sendTitlePart(TitlePart.TITLE, Component.text("Paused").color(TextColor.fromHexString("#5b45ff")));
                     break;
                 }
-                challengeManager.resume();
+                fUtils.getChallengeManager().resume();
+                event.getWhoClicked().sendTitlePart(TitlePart.TITLE, Component.text("Resumed").color(TextColor.fromHexString("#5b45ff")));
                 break;
             case 23:
-                challengeManager.stop();
+                fUtils.getChallengeManager().stop();
+                event.getWhoClicked().sendTitlePart(TitlePart.TITLE, Component.text("Stopped").color(TextColor.fromHexString("#5b45ff")));
+                getInventory().close();
                 break;
         }
+        // FIXME: why have i done this?
         items.set(22, challengeRunningIndicator());
         renderItems();
     }
