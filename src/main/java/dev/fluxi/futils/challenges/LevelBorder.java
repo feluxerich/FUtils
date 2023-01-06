@@ -9,15 +9,10 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 import java.util.Objects;
 
 public class LevelBorder extends Challenge {
-    Location spawn;
-    WorldBorder worldBorder;
+    World world;
     public LevelBorder() {
         name("LevelBorder");
         itemMaterial(Material.EXPERIENCE_BOTTLE);
-
-        World world = Objects.requireNonNull(Bukkit.getWorld("world"));
-        this.spawn = world.getSpawnLocation();
-        this.worldBorder = world.getWorldBorder();
     }
 
     @EventHandler
@@ -25,7 +20,7 @@ public class LevelBorder extends Challenge {
         if (event.getOldLevel() > event.getNewLevel()) {
             return;
         }
-        worldBorder.setSize(worldBorder.getSize() + event.getNewLevel() - event.getOldLevel(), 2);
+        world.getWorldBorder().setSize(world.getWorldBorder().getSize() + event.getNewLevel() - event.getOldLevel(), 2);
     }
 
     @EventHandler
@@ -36,13 +31,15 @@ public class LevelBorder extends Challenge {
     @Override
     public void enable() {
         super.enable();
-        worldBorder.setSize(1);
-        worldBorder.setCenter(spawn.toCenterLocation());
+
+        world = Objects.requireNonNull(Bukkit.getWorld("world"));
+        world.getWorldBorder().setSize(1);
+        world.getWorldBorder().setCenter(world.getSpawnLocation());
     }
 
     @Override
     public void disable() {
         super.disable();
-        worldBorder.reset();
+        world.getWorldBorder().reset();
     }
 }

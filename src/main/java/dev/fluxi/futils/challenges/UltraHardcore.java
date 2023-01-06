@@ -9,10 +9,10 @@ import java.util.Objects;
 
 public class UltraHardcore extends Challenge {
     World world;
+
     public UltraHardcore() {
         name("UltraHardcore");
         itemMaterial(Material.GOLDEN_APPLE);
-        this.world = Objects.requireNonNull(Bukkit.getWorld("world"));
     }
 
     @EventHandler
@@ -23,6 +23,7 @@ public class UltraHardcore extends Challenge {
     @Override
     public void enable() {
         super.enable();
+        world = Objects.requireNonNull(Bukkit.getWorld("world"));
         world.setGameRule(GameRule.NATURAL_REGENERATION, false);
     }
 
