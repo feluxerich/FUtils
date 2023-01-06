@@ -1,7 +1,7 @@
 package dev.fluxi.futils.utils;
 
 import dev.fluxi.futils.FUtils;
-import net.kyori.adventure.text.Component;
+import dev.fluxi.futils.utils.component.LinearGradientComponent;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
@@ -77,16 +77,18 @@ public class Timer {
     public void sendActionBar() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (!isRunning()) {
-                player.sendActionBar(Component.text()
-                        .append(Component.text(prettifyTime()))
-                        .color(TextColor.fromHexString("#7866ff"))
-                        .decorate(TextDecoration.BOLD));
+                player.sendActionBar(
+                        new LinearGradientComponent(prettifyTime(),
+                        TextColor.fromHexString("#ef4444"),
+                        TextColor.fromHexString("#5b45ff")
+                ).getGradientComponent().decorate(TextDecoration.BOLD));
                 continue;
             }
-            player.sendActionBar(Component.text()
-                    .append(Component.text(prettifyTime()))
-                    .color(TextColor.fromHexString("#5b45ff"))
-                    .decorate(TextDecoration.BOLD));
+            player.sendActionBar(
+                    new LinearGradientComponent(prettifyTime(),
+                            TextColor.fromHexString("#5b45ff"),
+                            TextColor.fromHexString("#ef4444")
+                    ).getGradientComponent().decorate(TextDecoration.BOLD));
         }
     }
 
