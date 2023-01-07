@@ -30,4 +30,3 @@ commands:
     usage: /reset <confirm>
     description: Reset the world on this server
   world:
-    
