@@ -1,10 +1,13 @@
 package dev.fluxi.futils;
 
 import dev.fluxi.futils.commands.*;
+import dev.fluxi.futils.listeners.BlockUpdateListener;
 import dev.fluxi.futils.listeners.PlayerInteractEntityListener;
+import dev.fluxi.futils.listeners.PlayerPortalListener;
+import dev.fluxi.futils.listeners.WorldLoadListener;
 import dev.fluxi.futils.utils.ExtendedPlugin;
 import dev.fluxi.futils.utils.Timer;
-import dev.fluxi.futils.utils.challenge.ChallengeManager;
+import dev.fluxi.futils.challenges.ChallengeManager;
 import dev.fluxi.futils.utils.VanishManager;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -48,10 +51,14 @@ public final class FUtils extends ExtendedPlugin implements Listener {
         registerCommand("challenge", new ChallengeCommand());
         registerCommand("timer", new TimerCommand());
         registerCommand("reset", new ResetCommand());
+        registerCommand("world", new WorldCommand());
     }
 
     private void registerEvents() {
         registerEvent(new PlayerInteractEntityListener());
+        registerEvent(new BlockUpdateListener());
+        registerEvent(new WorldLoadListener());
+        registerEvent(new PlayerPortalListener());
         registerEvent(this);
     }
 

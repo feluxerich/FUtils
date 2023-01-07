@@ -1,7 +1,6 @@
-package dev.fluxi.futils.utils.challenge;
+package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.challenges.*;
 import dev.fluxi.futils.utils.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

@@ -1,6 +1,5 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.utils.challenge.Challenge;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
