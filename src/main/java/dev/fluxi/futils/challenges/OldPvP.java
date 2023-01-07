@@ -1,6 +1,5 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.utils.challenge.Challenge;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

@@ -1,7 +1,7 @@
 package dev.fluxi.futils.utils.gui;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.utils.challenge.Challenge;
+import dev.fluxi.futils.challenges.Challenge;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.title.TitlePart;

@@ -1,7 +1,7 @@
 package dev.fluxi.futils.commands;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.utils.challenge.ChallengeManager;
+import dev.fluxi.futils.challenges.ChallengeManager;
 import dev.fluxi.futils.utils.gui.ChallengeGui;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;

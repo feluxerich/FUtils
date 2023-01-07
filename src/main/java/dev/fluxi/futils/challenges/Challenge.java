@@ -1,4 +1,4 @@
-package dev.fluxi.futils.utils.challenge;
+package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
 import org.bukkit.Material;
