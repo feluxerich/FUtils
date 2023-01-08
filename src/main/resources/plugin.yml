@@ -15,12 +15,6 @@ commands:
     permission: futils.heal
     usage: /heal <player>
     description: Reset the vitals of yourself or of all players
-  challenge:
-    permission: futils.challenge
-    usage: /challenge <operation> <challenge>
-    description: Start, pause or stop a challenge
-    aliases:
-      - c
   timer:
     permission: futils.timer
     usage: /timer <operation>
@@ -29,4 +23,7 @@ commands:
     permission: futils.reset
     usage: /reset <confirm>
     description: Reset the world on this server
-  world:
+  gui:
+    permission: futils.manage
+    usage: /gui
+    description: Opens the manager GUI

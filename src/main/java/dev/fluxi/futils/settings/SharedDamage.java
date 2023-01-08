@@ -1,14 +1,15 @@
-package dev.fluxi.futils.challenges;
+package dev.fluxi.futils.settings;
 
+import dev.fluxi.futils.gui.GuiAccessible;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class SharedDamage extends Challenge {
+public class SharedDamage extends GuiAccessible {
     public SharedDamage() {
-        name("SharedDamage");
+        name("Shared Damage");
         itemMaterial(Material.CHAIN);
     }
 
