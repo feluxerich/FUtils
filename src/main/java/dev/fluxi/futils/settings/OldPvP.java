@@ -1,5 +1,6 @@
-package dev.fluxi.futils.challenges;
+package dev.fluxi.futils.settings;
 
+import dev.fluxi.futils.gui.GuiAccessible;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -9,11 +10,11 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class OldPvP extends Challenge {
+public class OldPvP extends GuiAccessible {
     public static final double oldAttackSpeed = 32;
     public static final double newAttackSpeed = 4;
     public OldPvP() {
-        name("OldPvP");
+        name("Old PvP");
         itemMaterial(Material.DIAMOND_SWORD);
     }
 
