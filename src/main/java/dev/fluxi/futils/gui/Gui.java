@@ -1,11 +1,13 @@
-package dev.fluxi.futils.utils.gui;
+package dev.fluxi.futils.gui;
 
+import dev.fluxi.futils.FUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.Inventory;
@@ -14,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.logging.Level;
 
 public class Gui implements Listener {
     protected int rows;
@@ -27,6 +30,8 @@ public class Gui implements Listener {
         this.rows = rows;
         this.items = items;
 
+        FUtils.getInstance().registerEvent(this);
+
         this.inventory = Bukkit.createInventory(null, rows * 9, getTitle());
         renderItems();
     }
@@ -39,7 +44,7 @@ public class Gui implements Listener {
         }
     }
 
-    public ItemStack createItem(Material material, Component name, List<Component> lore) {
+    public static ItemStack createItem(Material material, Component name, List<Component> lore) {
         ItemStack item = new ItemStack(material);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(name);
@@ -53,6 +58,7 @@ public class Gui implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+        FUtils.getInstance().getLogger().log(Level.INFO, "test3");
         if (event.getInventory() != getInventory()) {
             return;
         }
@@ -73,6 +79,14 @@ public class Gui implements Listener {
             return;
         }
         event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        if (event.getInventory() != getInventory()) {
+            return;
+        }
+        FUtils.getInstance().unregisterEvent(this);
     }
 
     public Component getTitle() {

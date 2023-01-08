@@ -1,5 +1,6 @@
 package dev.fluxi.futils.challenges;
 
+import dev.fluxi.futils.gui.GuiAccessible;
 import org.bukkit.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -7,7 +8,7 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 
 import java.util.Objects;
 
-public class LevelBorder extends Challenge {
+public class LevelBorder extends GuiAccessible {
     World world;
     public LevelBorder() {
         name("LevelBorder");
