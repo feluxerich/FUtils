@@ -53,7 +53,6 @@ public final class FUtils extends ExtendedPlugin implements Listener {
         registerCommand("heal", new HealCommand());
         registerCommand("timer", new TimerCommand());
         registerCommand("reset", new ResetCommand());
-        registerCommand("world", new WorldCommand());
         registerCommand("gui", new GuiCommand());
     }
 
