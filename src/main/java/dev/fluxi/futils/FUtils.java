@@ -5,10 +5,11 @@ import dev.fluxi.futils.listeners.BlockUpdateListener;
 import dev.fluxi.futils.listeners.PlayerInteractEntityListener;
 import dev.fluxi.futils.listeners.PlayerPortalListener;
 import dev.fluxi.futils.listeners.WorldLoadListener;
+import dev.fluxi.futils.managers.SettingsManager;
 import dev.fluxi.futils.utils.ExtendedPlugin;
 import dev.fluxi.futils.utils.Timer;
-import dev.fluxi.futils.challenges.ChallengeManager;
-import dev.fluxi.futils.utils.VanishManager;
+import dev.fluxi.futils.managers.ChallengeManager;
+import dev.fluxi.futils.managers.VanishManager;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -22,6 +23,7 @@ public final class FUtils extends ExtendedPlugin implements Listener {
 
     private VanishManager vanishManager;
     private ChallengeManager challengeManager;
+    private SettingsManager settingsManager;
     private Timer timer;
 
     @Override
@@ -40,6 +42,7 @@ public final class FUtils extends ExtendedPlugin implements Listener {
         vanishManager = new VanishManager();
         timer = new Timer();
         challengeManager = new ChallengeManager();
+        settingsManager = new SettingsManager();
 
         registerCommands();
         registerEvents();
@@ -48,10 +51,10 @@ public final class FUtils extends ExtendedPlugin implements Listener {
     private void registerCommands() {
         registerCommand("vanish", new VanishCommand());
         registerCommand("heal", new HealCommand());
-        registerCommand("challenge", new ChallengeCommand());
         registerCommand("timer", new TimerCommand());
         registerCommand("reset", new ResetCommand());
         registerCommand("world", new WorldCommand());
+        registerCommand("gui", new GuiCommand());
     }
 
     private void registerEvents() {
@@ -85,6 +88,10 @@ public final class FUtils extends ExtendedPlugin implements Listener {
 
     public ChallengeManager getChallengeManager() {
         return challengeManager;
+    }
+
+    public SettingsManager getSettingsManager() {
+        return settingsManager;
     }
 
     public Timer getTimer() {
