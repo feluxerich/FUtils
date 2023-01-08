@@ -1,7 +1,7 @@
 package dev.fluxi.futils.commands;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.utils.VanishManager;
+import dev.fluxi.futils.managers.VanishManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

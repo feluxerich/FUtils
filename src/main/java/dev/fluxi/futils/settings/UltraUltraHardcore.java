@@ -1,4 +1,4 @@
-package dev.fluxi.futils.challenges;
+package dev.fluxi.futils.settings;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 
 public class UltraUltraHardcore extends UltraHardcore {
     public UltraUltraHardcore() {
-        name("UltraUltraHardcore");
+        name("Ultra Ultra Hardcore");
         itemMaterial(Material.ENCHANTED_GOLDEN_APPLE);
     }
 

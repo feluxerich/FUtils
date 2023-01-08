@@ -1,4 +1,4 @@
-package dev.fluxi.futils.utils;
+package dev.fluxi.futils.managers;
 
 import dev.fluxi.futils.FUtils;
 import org.bukkit.Bukkit;
