@@ -11,7 +11,7 @@ import java.util.Objects;
 public class LevelBorder extends GuiAccessible {
     World world;
     public LevelBorder() {
-        name("LevelBorder");
+        name("Level Border");
         itemMaterial(Material.EXPERIENCE_BOTTLE);
     }
 

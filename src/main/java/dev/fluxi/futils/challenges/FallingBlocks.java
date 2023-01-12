@@ -1,0 +1,45 @@
+package dev.fluxi.futils.challenges;
+
+import dev.fluxi.futils.FUtils;
+import dev.fluxi.futils.gui.GuiAccessible;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.FallingBlock;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.util.Vector;
+
+public class FallingBlocks extends GuiAccessible {
+    public FallingBlocks() {
+        name("Falling Blocks");
+        itemMaterial(Material.SAND);
+    }
+
+    @EventHandler()
+    public void onPlayerMove(PlayerMoveEvent event) {
+        if (!FUtils.getInstance().getTimer().isRunning()) {
+            return;
+        }
+
+        Block block = event.getTo().getBlock();
+        Location blockLocation = block.getLocation();
+        blockLocation.setY(blockLocation.getBlockY() - 1);
+
+        Block blockBelow = block.getWorld().getBlockAt(blockLocation);
+        Bukkit.getScheduler().runTaskLater(FUtils.getInstance(), () -> boostBlockInAir(blockBelow), 20);
+
+    }
+
+    private void boostBlockInAir(Block block) {
+        if (!block.getType().isSolid()) return;
+
+        FallingBlock fallingBlock = block.getWorld()
+                .spawnFallingBlock(block.getLocation().add(0.5, 0, 0.5), block.getBlockData());
+        fallingBlock.setInvulnerable(true);
+        fallingBlock.setVelocity(new Vector(0, 1, 0));
+
+        block.setType(Material.AIR);
+    }
+}
