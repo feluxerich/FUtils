@@ -16,7 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
-import java.util.logging.Level;
 
 public class Gui implements Listener {
     protected int rows;
@@ -58,7 +57,6 @@ public class Gui implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        FUtils.getInstance().getLogger().log(Level.INFO, "test3");
         if (event.getInventory() != getInventory()) {
             return;
         }
