@@ -1,7 +1,7 @@
 package dev.fluxi.futils.utils;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.utils.component.LinearGradientComponent;
+import dev.fluxi.futils.components.LinearGradientComponent;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;

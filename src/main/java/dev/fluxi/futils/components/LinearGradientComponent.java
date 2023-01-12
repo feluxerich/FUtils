@@ -1,4 +1,4 @@
-package dev.fluxi.futils.utils.component;
+package dev.fluxi.futils.components;
 
 import dev.fluxi.futils.colors.LinearGradient;
 import net.kyori.adventure.text.Component;
