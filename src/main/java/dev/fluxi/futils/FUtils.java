@@ -1,10 +1,7 @@
 package dev.fluxi.futils;
 
 import dev.fluxi.futils.commands.*;
-import dev.fluxi.futils.listeners.BlockUpdateListener;
-import dev.fluxi.futils.listeners.PlayerInteractEntityListener;
-import dev.fluxi.futils.listeners.PlayerPortalListener;
-import dev.fluxi.futils.listeners.WorldLoadListener;
+import dev.fluxi.futils.listeners.*;
 import dev.fluxi.futils.managers.SettingsManager;
 import dev.fluxi.futils.utils.ExtendedPlugin;
 import dev.fluxi.futils.utils.Timer;
@@ -61,6 +58,7 @@ public final class FUtils extends ExtendedPlugin implements Listener {
         registerEvent(new BlockUpdateListener());
         registerEvent(new WorldLoadListener());
         registerEvent(new PlayerPortalListener());
+        registerEvent(new PlayerJoinListener());
         registerEvent(this);
     }
 
