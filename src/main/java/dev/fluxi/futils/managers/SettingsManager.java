@@ -15,5 +15,6 @@ public class SettingsManager extends Manager {
         items().add(new UltraHardcore());
         items().add(new UltraUltraHardcore());
         items().add(new Hardcore());
+        items().add(new NoHitDelay());
     }
 }

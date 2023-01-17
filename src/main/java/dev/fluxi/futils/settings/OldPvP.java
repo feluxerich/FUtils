@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class OldPvP extends GuiAccessible {
     public static final double oldAttackSpeed = 32;
     public static final double newAttackSpeed = 4;
+
     public OldPvP() {
         name("Old PvP");
         itemMaterial(Material.DIAMOND_SWORD);
