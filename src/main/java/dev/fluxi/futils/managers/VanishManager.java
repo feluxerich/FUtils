@@ -1,6 +1,7 @@
 package dev.fluxi.futils.managers;
 
 import dev.fluxi.futils.FUtils;
+import dev.fluxi.futils.utils.ExtendedPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VanishManager implements Listener {
-    private final FUtils plugin = FUtils.getInstance();
+    private final ExtendedPlugin plugin = FUtils.getInstance();
     private final List<Player> vanished = new ArrayList<>();
 
     public VanishManager() {

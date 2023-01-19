@@ -16,16 +16,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 public final class FUtils extends ExtendedPlugin implements Listener {
-    private static FUtils instance;
-
-    private VanishManager vanishManager;
-    private ChallengeManager challengeManager;
-    private SettingsManager settingsManager;
-    private Timer timer;
-
     @Override
     public void onLoad() {
-        super.onLoad();
         setInstance();
 
         if (!getConfig().getBoolean("reset")) return;
@@ -36,10 +28,10 @@ public final class FUtils extends ExtendedPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        vanishManager = new VanishManager();
-        timer = new Timer();
-        challengeManager = new ChallengeManager();
-        settingsManager = new SettingsManager();
+        setVanishManager(new VanishManager());
+        setChallengeManager(new ChallengeManager());
+        setSettingsManager(new SettingsManager());
+        setTimer(new Timer());
 
         registerCommands();
         registerEvents();
@@ -77,29 +69,5 @@ public final class FUtils extends ExtendedPlugin implements Listener {
 
         getLogger().log(Level.INFO, world.mkdirs() ? "World folder created" : "No World folder created");
         getLogger().log(Level.INFO, new File(world, "playerdata").mkdirs() ? "Playerdata folder created" : "No Playerdata folder created");
-    }
-
-    public VanishManager getVanishManager() {
-        return vanishManager;
-    }
-
-    public ChallengeManager getChallengeManager() {
-        return challengeManager;
-    }
-
-    public SettingsManager getSettingsManager() {
-        return settingsManager;
-    }
-
-    public Timer getTimer() {
-        return timer;
-    }
-
-    public static FUtils getInstance() {
-        return instance;
-    }
-
-    private void setInstance() {
-        instance = this;
     }
 }

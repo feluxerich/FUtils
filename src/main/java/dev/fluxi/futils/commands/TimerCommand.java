@@ -1,6 +1,7 @@
 package dev.fluxi.futils.commands;
 
 import dev.fluxi.futils.FUtils;
+import dev.fluxi.futils.utils.ExtendedPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TimerCommand implements CommandExecutor, TabCompleter {
-    FUtils fUtils = FUtils.getInstance();
+    ExtendedPlugin fUtils = FUtils.getInstance();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
