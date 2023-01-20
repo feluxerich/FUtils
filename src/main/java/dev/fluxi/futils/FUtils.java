@@ -1,9 +1,9 @@
 package dev.fluxi.futils;
 
-import dev.fluxi.futils.challenges.ChallengeManager;
+import dev.fluxi.futils.managers.ChallengeManager;
 import dev.fluxi.futils.commands.*;
 import dev.fluxi.futils.listeners.*;
-import dev.fluxi.futils.settings.SettingsManager;
+import dev.fluxi.futils.managers.SettingsManager;
 import dev.fluxi.futils.utils.ExtendedPlugin;
 import dev.fluxi.futils.utils.Timer;
 import dev.fluxi.futils.managers.VanishManager;

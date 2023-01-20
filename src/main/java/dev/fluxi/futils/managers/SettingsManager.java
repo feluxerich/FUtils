@@ -1,7 +1,11 @@
-package dev.fluxi.futils.settings;
+package dev.fluxi.futils.managers;
 
 import dev.fluxi.futils.inventory.items.Item;
 import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.settings.AdvancementDamage;
+import dev.fluxi.futils.settings.NoHitDelay;
+import dev.fluxi.futils.settings.OldPvP;
+import dev.fluxi.futils.settings.SharedDamage;
 
 import java.util.ArrayList;
 import java.util.List;

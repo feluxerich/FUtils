@@ -14,8 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class PaginatedMenu extends BaseInventory {
-    private int page = 0;
-    private final List<Page> pages = new ArrayList<>();
+    public int page = 0;
+    public final List<Page> pages = new ArrayList<>();
 
     public PaginatedMenu(Component title, List<Item> items) {
         super(title, 5, new ArrayList<>());
@@ -23,7 +23,7 @@ public class PaginatedMenu extends BaseInventory {
         items(pages().get(page).items());
     }
 
-    private void createPages(List<Item> items) {
+    public void createPages(List<Item> items) {
         List<Item> modifiableItems = new ArrayList<>(items);
         if (modifiableItems.size() % 8 != 0) {
             modifiableItems.addAll(Collections.nCopies(8 - (modifiableItems.size() % 8), new Item(Material.GRAY_STAINED_GLASS_PANE)));

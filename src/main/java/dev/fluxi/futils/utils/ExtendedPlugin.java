@@ -1,8 +1,8 @@
 package dev.fluxi.futils.utils;
 
-import dev.fluxi.futils.challenges.ChallengeManager;
+import dev.fluxi.futils.managers.ChallengeManager;
 import dev.fluxi.futils.managers.VanishManager;
-import dev.fluxi.futils.settings.SettingsManager;
+import dev.fluxi.futils.managers.SettingsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;

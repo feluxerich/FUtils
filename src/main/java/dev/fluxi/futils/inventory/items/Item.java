@@ -8,9 +8,14 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public class Item {
-    private final Material material;
+    private Material material = null;
     private Component name = Component.text("");
     private List<Component> description = null;
+    private ItemStack item = null;
+
+    public Item(ItemStack item) {
+        this.item = item;
+    }
 
     public Item(Material material) {
         this.material = material;
@@ -34,6 +39,9 @@ public class Item {
      * @return Returns item as {@link ItemStack}.
      */
     public ItemStack item() {
+        if (item != null) {
+            return item;
+        }
         return BaseInventory.createItem(material, name, description);
     }
 

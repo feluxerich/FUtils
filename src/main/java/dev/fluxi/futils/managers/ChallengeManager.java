@@ -1,5 +1,9 @@
-package dev.fluxi.futils.challenges;
+package dev.fluxi.futils.managers;
 
+import dev.fluxi.futils.challenges.BlockBreakVoid;
+import dev.fluxi.futils.challenges.DamageClearInventory;
+import dev.fluxi.futils.challenges.FallingBlocks;
+import dev.fluxi.futils.challenges.IcePlatform;
 import dev.fluxi.futils.inventory.items.Item;
 import dev.fluxi.futils.inventory.items.Toggleable;
 

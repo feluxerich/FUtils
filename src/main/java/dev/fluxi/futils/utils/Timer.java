@@ -47,36 +47,36 @@ public class Timer {
         FUtils.getInstance().saveConfig();
     }
 
-    public boolean isRunning() {
+    public boolean running() {
         return isRunning;
     }
 
-    public void setRunning(boolean running) {
+    public void running(boolean running) {
         isRunning = running;
         setConfig();
     }
 
-    public int getTime() {
+    public int time() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void time(int time) {
         this.time = time;
         setConfig();
     }
 
-    public boolean isHidden() {
+    public boolean hidden() {
         return isHidden;
     }
 
-    public void setHidden(boolean hidden) {
+    public void hidden(boolean hidden) {
         isHidden = hidden;
         setConfig();
     }
 
     public void sendActionBar() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (!isRunning()) {
+            if (!running()) {
                 player.sendActionBar(
                         new LinearGradientComponent(prettifyTime(),
                         TextColor.fromHexString("#ef4444"),
@@ -96,20 +96,20 @@ public class Timer {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (isHidden()) {
+                if (hidden()) {
                     return;
                 }
                 sendActionBar();
-                if (!isRunning()) {
+                if (!running()) {
                     return;
                 }
-                setTime(getTime() + 1);
+                time(time() + 1);
             }
         }.runTaskTimer(FUtils.getInstance(), 20, 20);
     }
 
-    private String prettifyTime() {
-        int time = getTime();
+    public String prettifyTime() {
+        int time = time();
 
         int seconds = time % 60;
         int minutes = (time % 3600) / 60;

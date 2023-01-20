@@ -18,20 +18,8 @@ public class Page {
         items(createPageItems(items));
     }
 
-    private List<Item> createPageItems(List<Item> items) {
-        List<Item> pageItems = new ArrayList<>();
-        Item black = new Item(Material.BLACK_STAINED_GLASS_PANE, Component.text(""));
-        int itemIndex = 0;
-        for (int row = 0; row < 5; row++) {
-            for (int slot = 0; slot < 9; slot++) {
-                if (row % 2 == 0 || slot % 2 == 0) {
-                    pageItems.add(black);
-                    continue;
-                }
-                pageItems.add(items.get(itemIndex));
-                itemIndex++;
-            }
-        }
+    public List<Item> createPageItems(List<Item> items) {
+        List<Item> pageItems = placeItems(items);
         pageItems.set(36, new Item(Material.DARK_OAK_DOOR, Component.text(
                 "Back to Main",
                 Style.style(TextColor.fromHexString("#7866ff"),
@@ -46,6 +34,23 @@ public class Page {
                         Component.text("Right click >> Scroll backwards", Style.style(TextColor.fromHexString("#ef4444"), TextDecoration.ITALIC.withState(false)))
                 )
         ));
+        return pageItems;
+    }
+
+    public List<Item> placeItems(List<Item> items) {
+        List<Item> pageItems = new ArrayList<>();
+        Item black = new Item(Material.BLACK_STAINED_GLASS_PANE, Component.text(""));
+        int itemIndex = 0;
+        for (int row = 0; row < 5; row++) {
+            for (int slot = 0; slot < 9; slot++) {
+                if (row % 2 == 0 || slot % 2 == 0) {
+                    pageItems.add(black);
+                    continue;
+                }
+                pageItems.add(items.get(itemIndex));
+                itemIndex++;
+            }
+        }
         return pageItems;
     }
 

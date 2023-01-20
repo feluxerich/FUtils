@@ -18,7 +18,7 @@ public class FallingBlocks extends Toggleable {
 
     @EventHandler()
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!FUtils.getInstance().getTimer().isRunning()) {
+        if (!FUtils.getInstance().getTimer().running()) {
             return;
         }
 

@@ -25,31 +25,31 @@ public class TimerCommand implements CommandExecutor, TabCompleter {
 
         switch (args[0].toLowerCase()) {
             case "resume":
-                if (fUtils.getTimer().isRunning()) {
+                if (fUtils.getTimer().running()) {
                     sender.sendMessage(ChatColor.RED + "Timer is already running");
                     break;
                 }
-                fUtils.getTimer().setRunning(true);
+                fUtils.getTimer().running(true);
                 showTimerIfHidden();
                 break;
             case "pause":
-                if (!fUtils.getTimer().isRunning()) {
+                if (!fUtils.getTimer().running()) {
                     sender.sendMessage(ChatColor.RED + "Timer is already paused");
                     break;
                 }
-                fUtils.getTimer().setRunning(false);
+                fUtils.getTimer().running(false);
                 showTimerIfHidden();
                 break;
             case "reset":
-                fUtils.getTimer().setRunning(false);
-                fUtils.getTimer().setTime(0);
+                fUtils.getTimer().running(false);
+                fUtils.getTimer().time(0);
                 showTimerIfHidden();
                 break;
 
             case "remove":
-                fUtils.getTimer().setRunning(false);
-                fUtils.getTimer().setTime(0);
-                fUtils.getTimer().setHidden(true);
+                fUtils.getTimer().running(false);
+                fUtils.getTimer().time(0);
+                fUtils.getTimer().hidden(true);
                 break;
             default:
                 sender.sendMessage(ChatColor.RED + "Please specify an operation");
@@ -64,9 +64,9 @@ public class TimerCommand implements CommandExecutor, TabCompleter {
     }
 
     private void showTimerIfHidden() {
-        if (!fUtils.getTimer().isHidden()) {
+        if (!fUtils.getTimer().hidden()) {
             return;
         }
-        fUtils.getTimer().setHidden(false);
+        fUtils.getTimer().hidden(false);
     }
 }
