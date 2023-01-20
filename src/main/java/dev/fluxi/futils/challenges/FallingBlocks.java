@@ -1,7 +1,7 @@
 package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.gui.GuiAccessible;
+import dev.fluxi.futils.inventory.items.Toggleable;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,10 +11,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
-public class FallingBlocks extends GuiAccessible {
+public class FallingBlocks extends Toggleable {
     public FallingBlocks() {
-        name("Falling Blocks");
-        itemMaterial(Material.SAND);
+        super(Material.SAND, coloredComponent("Falling Blocks"));
     }
 
     @EventHandler()

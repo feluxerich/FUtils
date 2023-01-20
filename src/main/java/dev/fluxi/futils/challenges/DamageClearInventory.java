@@ -1,15 +1,14 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.gui.GuiAccessible;
+import dev.fluxi.futils.inventory.items.Toggleable;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class DamageClearInventory extends GuiAccessible {
+public class DamageClearInventory extends Toggleable {
     public DamageClearInventory() {
-        name("Damage Clear Inventory");
-        itemMaterial(Material.ENDER_CHEST);
+        super(Material.ENDER_CHEST, coloredComponent("Damage Clear Inventory"));
     }
 
     @EventHandler

@@ -1,6 +1,6 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.gui.GuiAccessible;
+import dev.fluxi.futils.inventory.items.Toggleable;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -8,12 +8,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
-public class IcePlatform extends GuiAccessible {
+public class IcePlatform extends Toggleable {
     private boolean active = false;
 
     public IcePlatform() {
-        name("Ice Platform");
-        itemMaterial(Material.BLUE_ICE);
+        super(Material.BLUE_ICE, coloredComponent("Ice Platform"));
     }
 
     @EventHandler

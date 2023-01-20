@@ -1,6 +1,6 @@
 package dev.fluxi.futils.commands;
 
-import dev.fluxi.futils.gui.MainGui;
+import dev.fluxi.futils.inventory.guis.MainMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +20,8 @@ public class GuiCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         Player player = (Player) sender;
-        player.openInventory(new MainGui().getInventory());
+
+        player.openInventory(new MainMenu().inventory());
         return true;
     }
 

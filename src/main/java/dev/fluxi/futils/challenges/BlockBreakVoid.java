@@ -1,6 +1,6 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.gui.GuiAccessible;
+import dev.fluxi.futils.inventory.items.Toggleable;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -9,10 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class BlockBreakVoid extends GuiAccessible {
+public class BlockBreakVoid extends Toggleable {
     public BlockBreakVoid() {
-        name("Block Break Void");
-        itemMaterial(Material.NETHERITE_PICKAXE);
+        super(Material.NETHERITE_PICKAXE, coloredComponent("Block Break Void"));
     }
 
     @EventHandler
