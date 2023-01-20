@@ -13,6 +13,7 @@ public class Timer {
     private int time = 0;
     private boolean isRunning = false;
     private boolean isHidden = true;
+    private boolean countsUp = true;
 
     public Timer() {
         getConfig();
@@ -47,6 +48,25 @@ public class Timer {
         FUtils.getInstance().saveConfig();
     }
 
+    public void toggle() {
+        if (!running() && hidden()) {
+            hidden(false);
+        }
+        running(!running());
+    }
+
+    public void invert() {
+        countsUp(!countsUp());
+    }
+
+    public boolean countsUp() {
+        return countsUp;
+    }
+
+    public void countsUp(boolean countsUp) {
+        this.countsUp = countsUp;
+    }
+
     public boolean running() {
         return isRunning;
     }
@@ -61,6 +81,10 @@ public class Timer {
     }
 
     public void time(int time) {
+        if (time < 0) {
+            running(false);
+            return;
+        }
         this.time = time;
         setConfig();
     }
@@ -103,7 +127,11 @@ public class Timer {
                 if (!running()) {
                     return;
                 }
-                time(time() + 1);
+                if (countsUp) {
+                    time(time() + 1);
+                } else {
+                    time(time() - 1);
+                }
             }
         }.runTaskTimer(FUtils.getInstance(), 20, 20);
     }
