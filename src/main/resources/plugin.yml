@@ -9,11 +9,11 @@ load: STARTUP
 commands:
   vanish:
     permission: futils.vanish
-    usage: /vanish <player>
+    usage: /vanish <[player]>
     description: Hide yourself or another player
   heal:
     permission: futils.heal
-    usage: /heal <player>
+    usage: /heal <[player]>
     description: Reset the vitals of yourself or of all players
   timer:
     permission: futils.timer
@@ -21,9 +21,15 @@ commands:
     description: Use a timer in players actionbar
   reset:
     permission: futils.reset
-    usage: /reset <confirm>
+    usage: /reset <[confirm]>
     description: Reset the world on this server
   gui:
     permission: futils.manage
     usage: /gui
     description: Opens the manager GUI
+  top:
+    aliases:
+      - t
+    permission: futils.top
+    usage: /top
+    description: Teleports to the top
