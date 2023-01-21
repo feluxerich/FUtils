@@ -1,5 +1,6 @@
 package dev.fluxi.futils.commands;
 
+import org.bukkit.Location;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
