@@ -43,7 +43,7 @@ public final class FUtils extends ExtendedPlugin implements Listener {
         registerCommand("timer", new TimerCommand());
         registerCommand("reset", new ResetCommand());
         registerCommand("gui", new GuiCommand());
-        registerCommand("top", new TopCommand())
+        registerCommand("top", new TopCommand());
     }
 
     private void registerEvents() {
