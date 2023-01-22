@@ -2,7 +2,6 @@ package dev.fluxi.futils.inventory.guis;
 
 import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.BaseInventory;
-import dev.fluxi.futils.inventory.guis.timer.TimerMenu;
 import dev.fluxi.futils.inventory.items.Item;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
