@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -71,15 +70,6 @@ public class InventoryManager implements Listener {
     }
 
     @EventHandler
-    public void onGameModeChange(PlayerGameModeChangeEvent event) {
-        if (event.getNewGameMode() == GameMode.SURVIVAL) {
-            FUtils.getInstance().getInventoryManager().removePlayer(event.getPlayer());
-            return;
-        }
-        FUtils.getInstance().getInventoryManager().overridePlayerInventory(event.getPlayer());
-    }
-
-    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getPlayer().getGameMode() == GameMode.SURVIVAL || event.getAction() != Action.RIGHT_CLICK_AIR) {
             return;
@@ -96,5 +86,6 @@ public class InventoryManager implements Listener {
                         Component.text("Timer", Style.style(TextColor.fromHexString("#7866ff")))).inventory());
                 break;
         }
+        event.setCancelled(true);
     }
 }

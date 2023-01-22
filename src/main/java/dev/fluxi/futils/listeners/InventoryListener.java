@@ -8,6 +8,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
 
 public class InventoryListener implements Listener {
@@ -46,6 +47,14 @@ public class InventoryListener implements Listener {
     @EventHandler
     public void onItemPickup(EntityPickupItemEvent event) {
         if (!(event.getEntity() instanceof Player) || !FUtils.getInstance().getInventoryManager().containsPlayer((Player) event.getEntity())) {
+            return;
+        }
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onItemDrop(PlayerDropItemEvent event) {
+        if (!FUtils.getInstance().getInventoryManager().containsPlayer(event.getPlayer())) {
             return;
         }
         event.setCancelled(true);
