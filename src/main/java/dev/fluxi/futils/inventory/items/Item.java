@@ -3,6 +3,7 @@ package dev.fluxi.futils.inventory.items;
 import dev.fluxi.futils.inventory.BaseInventory;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class Item {
         this.amount = amount;
     }
 
-    public void onClick() {}
+    public void onClick(Player clicker) {}
 
     /**
      * Creates the item defined in this class.

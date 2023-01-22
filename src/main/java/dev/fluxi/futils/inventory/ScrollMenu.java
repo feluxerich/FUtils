@@ -1,6 +1,5 @@
 package dev.fluxi.futils.inventory;
 
-import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.items.Item;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
@@ -16,13 +15,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class ScrollMenu extends BaseInventory {
-    private int scrollIndex = 0;
-    private final List<Item> menuItems;
+    public int scrollIndex = 0;
+    public final List<Item> menuItems;
 
     public ScrollMenu(Component title, List<Item> items) {
         super(title, 1, new ArrayList<>());
         this.menuItems = items;
-        FUtils.getInstance().registerEvent(this);
     }
 
     @Override

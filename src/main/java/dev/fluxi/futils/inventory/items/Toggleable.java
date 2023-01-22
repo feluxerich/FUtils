@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class Toggleable extends Item implements Listener {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(Player clicker) {
         toggle();
     }
 }

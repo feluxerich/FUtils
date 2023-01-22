@@ -50,7 +50,7 @@ public class PaginatedMenu extends BaseInventory {
                 }
                 items(pages().get(page).items());
         }
-        items().get(event.getSlot()).onClick();
+        items().get(event.getSlot()).onClick((Player) event.getWhoClicked());
         renderItems();
     }
 

@@ -1,6 +1,7 @@
 package dev.fluxi.futils.utils;
 
 import dev.fluxi.futils.managers.ChallengeManager;
+import dev.fluxi.futils.managers.InventoryManager;
 import dev.fluxi.futils.managers.VanishManager;
 import dev.fluxi.futils.managers.SettingsManager;
 import org.bukkit.Bukkit;
@@ -18,6 +19,7 @@ public class ExtendedPlugin extends JavaPlugin {
     private VanishManager vanishManager;
     private ChallengeManager challengeManager;
     private SettingsManager settingsManager;
+    private InventoryManager inventoryManager;
     private Timer timer;
 
     public void registerCommand(String name, CommandExecutor commandExecutor) {
@@ -55,6 +57,14 @@ public class ExtendedPlugin extends JavaPlugin {
 
     public void setSettingsManager(SettingsManager settingsManager) {
         this.settingsManager = settingsManager;
+    }
+
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
+    }
+
+    public void setInventoryManager(InventoryManager inventoryManager) {
+        this.inventoryManager = inventoryManager;
     }
 
     public Timer getTimer() {

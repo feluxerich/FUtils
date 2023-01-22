@@ -3,6 +3,7 @@ package dev.fluxi.futils;
 import dev.fluxi.futils.managers.ChallengeManager;
 import dev.fluxi.futils.commands.*;
 import dev.fluxi.futils.listeners.*;
+import dev.fluxi.futils.managers.InventoryManager;
 import dev.fluxi.futils.managers.SettingsManager;
 import dev.fluxi.futils.utils.ExtendedPlugin;
 import dev.fluxi.futils.utils.Timer;
@@ -31,6 +32,7 @@ public final class FUtils extends ExtendedPlugin implements Listener {
         setVanishManager(new VanishManager());
         setChallengeManager(new ChallengeManager());
         setSettingsManager(new SettingsManager());
+        setInventoryManager(new InventoryManager());
         setTimer(new Timer());
 
         registerCommands();
@@ -42,7 +44,7 @@ public final class FUtils extends ExtendedPlugin implements Listener {
         registerCommand("heal", new HealCommand());
         registerCommand("timer", new TimerCommand());
         registerCommand("reset", new ResetCommand());
-        registerCommand("gui", new GuiCommand());
+        registerCommand("menu", new MenuCommand());
         registerCommand("top", new TopCommand());
     }
 
@@ -52,6 +54,7 @@ public final class FUtils extends ExtendedPlugin implements Listener {
         registerEvent(new WorldLoadListener());
         registerEvent(new PlayerPortalListener());
         registerEvent(new PlayerJoinListener());
+        registerEvent(new InventoryListener());
         registerEvent(this);
     }
 
