@@ -21,7 +21,6 @@ public class FallingBlocks extends Toggleable {
         if (!FUtils.getInstance().getTimer().running()) {
             return;
         }
-
         Block block = event.getTo().getBlock();
         Location blockLocation = block.getLocation();
         blockLocation.setY(blockLocation.getBlockY() - 1);

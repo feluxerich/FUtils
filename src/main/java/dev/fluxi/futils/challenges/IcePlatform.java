@@ -1,5 +1,6 @@
 package dev.fluxi.futils.challenges;
 
+import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.items.Toggleable;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,6 +18,9 @@ public class IcePlatform extends Toggleable {
 
     @EventHandler
     public void onSneak(PlayerToggleSneakEvent event) {
+        if (!FUtils.getInstance().getTimer().running()) {
+            return;
+        }
         if (!event.isSneaking()) {
             return;
         }
@@ -25,21 +29,21 @@ public class IcePlatform extends Toggleable {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!active) {
+        if (!FUtils.getInstance().getTimer().running() || !active) {
             return;
         }
         Block block = event.getTo().getBlock();
         Location blockLocation = block.getLocation();
         blockLocation.setY(blockLocation.getBlockY() - 1);
-        setCircle(blockLocation, 2);
+        setIce(blockLocation);
     }
 
-    private void setCircle(Location location, int radius) {
+    private void setIce(Location location) {
+        int width = 3;
+        int radius = (width - 1) / 2;
         for (int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
             for (int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
-                if ((location.getBlockX() - x) * (location.getBlockX() - x) + (location.getBlockZ() - z) * (location.getBlockZ() - z) <= radius * radius) {
-                    location.getWorld().getBlockAt(x, location.getBlockY(), z).setType(Material.BLUE_ICE);
-                }
+                location.getWorld().getBlockAt(x, location.getBlockY(), z).setType(Material.BLUE_ICE);
             }
         }
     }

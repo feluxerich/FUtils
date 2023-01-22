@@ -1,5 +1,6 @@
 package dev.fluxi.futils.challenges;
 
+import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.items.Toggleable;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,6 +17,9 @@ public class BlockBreakVoid extends Toggleable {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
+        if (!FUtils.getInstance().getTimer().running()) {
+            return;
+        }
         Block block = event.getBlock();
         World world = block.getWorld();
         for (ItemStack drop : block.getDrops()) {
