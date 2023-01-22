@@ -25,7 +25,7 @@ public class TopCommand implements CommandExecutor, TabCompleter {
         double z = player.getLocation().getZ();
         int y = player.getWorld().getHighestBlockYAt((int) x, (int) z);
 
-        player.teleport(new Location(player.getWorld(), (int) x, y + 1, (int) z));
+        player.teleport(new Location(player.getWorld(), x, y + 1, z));
         return true;
     }
 
