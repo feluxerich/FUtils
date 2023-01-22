@@ -50,12 +50,11 @@ public final class FUtils extends ExtendedPlugin implements Listener {
 
     private void registerEvents() {
         registerEvent(new PlayerInteractEntityListener());
-        registerEvent(new BlockUpdateListener());
+        registerEvent(new BlockListener());
         registerEvent(new WorldLoadListener());
         registerEvent(new PlayerPortalListener());
         registerEvent(new PlayerJoinListener());
         registerEvent(new InventoryListener());
-        registerEvent(new BlockPlaceListener());
         registerEvent(this);
     }
 
