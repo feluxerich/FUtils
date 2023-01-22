@@ -1,4 +1,4 @@
-package dev.fluxi.futils.colors;
+package dev.fluxi.futils.utils.colors;
 
 import net.kyori.adventure.text.format.TextColor;
 
