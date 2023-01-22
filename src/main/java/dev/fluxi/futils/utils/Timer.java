@@ -70,6 +70,7 @@ public class Timer {
     }
 
     public void running(boolean running) {
+        overridePlayerInventories(running);
         this.running = running;
         setConfig();
     }
@@ -136,5 +137,18 @@ public class Timer {
         int days = time / 86400;
 
         return String.format("%02d:%02d:%02d:%02d", days, hours, minutes, seconds);
+    }
+
+    private void overridePlayerInventories(boolean remove) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (remove) {
+                FUtils.getInstance().getInventoryManager().removePlayer(player);
+                continue;
+            }
+            if (FUtils.getInstance().getInventoryManager().containsPlayer(player)) {
+                continue;
+            }
+            FUtils.getInstance().getInventoryManager().overridePlayerInventory(player);
+        }
     }
 }
