@@ -27,15 +27,17 @@ public class BlockListener implements Listener {
 
     @EventHandler
     public void onBlockPhysics(BlockPhysicsEvent event) {
-        if (event.getBlock().getChunk().getInhabitedTime() == 0) {
-            event.setCancelled(true);
+        if (event.getBlock().getChunk().getInhabitedTime() > 0) {
+            return;
         }
+        event.setCancelled(true);
     }
 
     @EventHandler
     public void onBlockFromTo(BlockFromToEvent event) {
-        if (event.getBlock().getChunk().getInhabitedTime() == 0) {
-            event.setCancelled(true);
+        if (event.getBlock().getChunk().getInhabitedTime() > 0) {
+            return;
         }
+        event.setCancelled(true);
     }
 }
