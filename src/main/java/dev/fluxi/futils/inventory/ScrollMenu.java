@@ -20,7 +20,7 @@ public class ScrollMenu extends BaseInventory {
     private final List<Item> menuItems;
 
     public ScrollMenu(Component title, List<Item> items) {
-        super(title, 3, new ArrayList<>());
+        super(title, 1, new ArrayList<>());
         this.menuItems = items;
         FUtils.getInstance().registerEvent(this);
     }
@@ -31,7 +31,6 @@ public class ScrollMenu extends BaseInventory {
             menuItems.addAll(Collections.nCopies(8 - menuItems.size(), new Item(Material.GRAY_STAINED_GLASS_PANE)));
         }
         List<Item> renderedItems = menuItems.subList(scrollIndex, scrollIndex + 8);
-        items().addAll(Collections.nCopies(9, new Item(Material.BLACK_STAINED_GLASS_PANE)));
         for (Item item : renderedItems) {
             items().add(item);
         }
@@ -43,7 +42,6 @@ public class ScrollMenu extends BaseInventory {
                         Component.text("Right click >> Scroll left", Style.style(TextColor.fromHexString("#ef4444"), TextDecoration.ITALIC.withState(false)))
                 )
         ));
-        items().addAll(Collections.nCopies(9, new Item(Material.BLACK_STAINED_GLASS_PANE)));
         renderItems();
     }
 
@@ -51,11 +49,6 @@ public class ScrollMenu extends BaseInventory {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         super.onInventoryClick(event);
-        if (event.getCurrentItem() == null ||
-                event.getCurrentItem().getType() == Material.LIGHT_GRAY_STAINED_GLASS_PANE ||
-                event.getCurrentItem().getType() == Material.GRAY_STAINED_GLASS_PANE) {
-            return;
-        }
         if (event.getSlot() == 17) {
             if (event.isLeftClick() && scrollIndex + 8 < menuItems.size()) {
                 scrollIndex++;
