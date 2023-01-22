@@ -1,7 +1,8 @@
 package dev.fluxi.futils.utils;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.components.LinearGradientComponent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
@@ -11,9 +12,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer {
     private int time = 0;
-    private boolean isRunning = false;
-    private boolean isHidden = true;
-    private boolean countsUp = true;
+    private boolean running = false;
+    private boolean ascending = true;
 
     public Timer() {
         getConfig();
@@ -30,49 +30,47 @@ public class Timer {
     private void getConfig() {
         ConfigurationSection section = getConfigSection();
         if (section.isSet("time")) {
-            time = section.getInt("time");
+            time(section.getInt("time"));
         }
         if (section.isSet("running")) {
-            isRunning = section.getBoolean("running");
+            running(section.getBoolean("running"));
         }
-        if (section.isSet("hidden")) {
-            isHidden = section.getBoolean("hidden");
+        if (section.isSet("ascending")) {
+            ascending(section.getBoolean("ascending"));
         }
     }
 
     private void setConfig() {
         ConfigurationSection section = getConfigSection();
-        section.set("time", time);
-        section.set("running", isRunning);
-        section.set("hidden", isHidden);
+        section.set("time", time());
+        section.set("running", running());
+        section.set("ascending", ascending());
         FUtils.getInstance().saveConfig();
     }
 
     public void toggle() {
-        if (!running() && hidden()) {
-            hidden(false);
-        }
         running(!running());
     }
 
     public void invert() {
-        countsUp(!countsUp());
+        ascending(!ascending());
     }
 
-    public boolean countsUp() {
-        return countsUp;
+    public boolean ascending() {
+        return ascending;
     }
 
-    public void countsUp(boolean countsUp) {
-        this.countsUp = countsUp;
+    public void ascending(boolean ascending) {
+        this.ascending = ascending;
+        setConfig();
     }
 
     public boolean running() {
-        return isRunning;
+        return running;
     }
 
     public void running(boolean running) {
-        isRunning = running;
+        this.running = running;
         setConfig();
     }
 
@@ -83,18 +81,10 @@ public class Timer {
     public void time(int time) {
         if (time < 0) {
             running(false);
+            setConfig();
             return;
         }
         this.time = time;
-        setConfig();
-    }
-
-    public boolean hidden() {
-        return isHidden;
-    }
-
-    public void hidden(boolean hidden) {
-        isHidden = hidden;
         setConfig();
     }
 
@@ -102,17 +92,21 @@ public class Timer {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (!running()) {
                 player.sendActionBar(
-                        new LinearGradientComponent(prettifyTime(),
-                        TextColor.fromHexString("#ef4444"),
-                        TextColor.fromHexString("#5b45ff")
-                ).getGradientComponent().decorate(TextDecoration.BOLD));
+                        Component.text("• " + prettifyTime() + " •", Style.style(
+                                TextColor.fromHexString("#7866ff"),
+                                TextDecoration.ITALIC.withState(false),
+                                TextDecoration.BOLD
+                        ))
+                );
                 continue;
             }
             player.sendActionBar(
-                    new LinearGradientComponent(prettifyTime(),
+                    Component.text(prettifyTime(), Style.style(
                             TextColor.fromHexString("#5b45ff"),
-                            TextColor.fromHexString("#ef4444")
-                    ).getGradientComponent().decorate(TextDecoration.BOLD));
+                            TextDecoration.ITALIC.withState(false),
+                            TextDecoration.BOLD
+                    ))
+            );
         }
     }
 
@@ -120,14 +114,11 @@ public class Timer {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (hidden()) {
-                    return;
-                }
                 sendActionBar();
                 if (!running()) {
                     return;
                 }
-                if (countsUp) {
+                if (ascending) {
                     time(time() + 1);
                 } else {
                     time(time() - 1);

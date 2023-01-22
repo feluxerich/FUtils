@@ -3,6 +3,7 @@ package dev.fluxi.futils.inventory.guis;
 import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.BaseInventory;
 import dev.fluxi.futils.inventory.items.Item;
+import dev.fluxi.futils.utils.ExtendedPlugin;
 import dev.fluxi.futils.utils.Timer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
@@ -19,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TimerMenu extends BaseInventory {
-    static Timer timer = FUtils.getInstance().getTimer();
+    static ExtendedPlugin fUtils = FUtils.getInstance();
 
     public TimerMenu(Component title) {
         super(title, 5, TimerMenu.initializeItems());
@@ -30,14 +31,14 @@ public class TimerMenu extends BaseInventory {
         Item decreaseButton = new Item(Material.RED_DYE, Component.text("Subtract", Style.style(TextColor.fromHexString("#5b45ff"), TextDecoration.ITALIC.withState(false))));
         List<Item> items = new ArrayList<>();
         items.add(new Item(Material.CLOCK, Component.text("Timer", Style.style(TextColor.fromHexString("#5b45ff"), TextDecoration.ITALIC.withState(false))), Arrays.asList(
-                Component.text(timer.prettifyTime(), Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false))),
+                Component.text(fUtils.getTimer().prettifyTime(), Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false))),
                 Component.text("Click to toggle Timer", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false))),
-                Component.text(timer.running() ? "Running" : "Paused", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false)))
+                Component.text(fUtils.getTimer().running() ? "Running" : "Paused", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false)))
         )));
         items.addAll(Collections.nCopies(3, increaseButton));
         items.add(new Item(
                 Material.COMMAND_BLOCK,
-                null,
+                Component.text(""),
                 Arrays.asList(
                         Component.text("Click: 1s", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false))),
                         Component.text("Shift-Click: 10s", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false)))
@@ -45,7 +46,7 @@ public class TimerMenu extends BaseInventory {
         ));
         items.add(new Item(
                 Material.COMMAND_BLOCK,
-                null,
+                Component.text(""),
                 Arrays.asList(
                         Component.text("Click: 1m", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false))),
                         Component.text("Shift-Click: 10m", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false)))
@@ -53,14 +54,15 @@ public class TimerMenu extends BaseInventory {
         ));
         items.add(new Item(
                 Material.COMMAND_BLOCK,
-                null,
+                Component.text(""),
                 Arrays.asList(
                         Component.text("Click: 30m", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false))),
                         Component.text("Shift-Click: 1h", Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false)))
                 )
         ));
-        items.add(new Item(Material.ARROW, Component.text("Invert Timer", Style.style(TextColor.fromHexString("#5b45ff"), TextDecoration.ITALIC.withState(false))), Collections.singletonList(Component.text(timer.countsUp() ? "Counts up" : "Counts down",
-                Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false))))));
+        items.add(new Item(Material.ARROW, Component.text("Invert Timer", Style.style(TextColor.fromHexString("#5b45ff"), TextDecoration.ITALIC.withState(false))),
+                Collections.singletonList(Component.text(fUtils.getTimer().ascending() ? "Counts up" : "Counts down",
+                        Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false))))));
         items.addAll(Collections.nCopies(3, decreaseButton));
 
         List<Item> formattedItems = new ArrayList<>();
@@ -89,6 +91,7 @@ public class TimerMenu extends BaseInventory {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         super.onInventoryClick(event);
+        Timer timer = fUtils.getTimer();
         switch (event.getSlot()) {
             case 10:
                 timer.toggle();
@@ -142,6 +145,11 @@ public class TimerMenu extends BaseInventory {
                 backToMain((Player) event.getWhoClicked());
                 break;
         }
+        recreate();
+    }
+
+    private void recreate() {
+        items(initializeItems());
         renderItems();
     }
 }

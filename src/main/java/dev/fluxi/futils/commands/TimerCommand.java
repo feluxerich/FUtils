@@ -24,32 +24,12 @@ public class TimerCommand implements CommandExecutor, TabCompleter {
         }
 
         switch (args[0].toLowerCase()) {
-            case "resume":
-                if (fUtils.getTimer().running()) {
-                    sender.sendMessage(ChatColor.RED + "Timer is already running");
-                    break;
-                }
-                fUtils.getTimer().running(true);
-                showTimerIfHidden();
-                break;
-            case "pause":
-                if (!fUtils.getTimer().running()) {
-                    sender.sendMessage(ChatColor.RED + "Timer is already paused");
-                    break;
-                }
-                fUtils.getTimer().running(false);
-                showTimerIfHidden();
+            case "toggle":
+                fUtils.getTimer().toggle();
                 break;
             case "reset":
                 fUtils.getTimer().running(false);
                 fUtils.getTimer().time(0);
-                showTimerIfHidden();
-                break;
-
-            case "remove":
-                fUtils.getTimer().running(false);
-                fUtils.getTimer().time(0);
-                fUtils.getTimer().hidden(true);
                 break;
             default:
                 sender.sendMessage(ChatColor.RED + "Please specify an operation");
@@ -60,13 +40,6 @@ public class TimerCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        return Stream.of("resume", "pause", "reset", "remove").filter(suggestion -> suggestion.startsWith(args[0])).collect(Collectors.toList());
-    }
-
-    private void showTimerIfHidden() {
-        if (!fUtils.getTimer().hidden()) {
-            return;
-        }
-        fUtils.getTimer().hidden(false);
+        return Stream.of("toggle", "reset").filter(suggestion -> suggestion.startsWith(args[0])).collect(Collectors.toList());
     }
 }
