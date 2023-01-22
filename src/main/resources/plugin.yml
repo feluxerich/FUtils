@@ -23,7 +23,9 @@ commands:
     permission: futils.reset
     usage: /reset <[confirm]>
     description: Reset the world on this server
-  gui:
+  menu:
+    aliases:
+      - gui
     permission: futils.manage
     usage: /gui
     description: Opens the manager GUI
