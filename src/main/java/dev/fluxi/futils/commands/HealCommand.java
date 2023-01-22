@@ -2,6 +2,7 @@ package dev.fluxi.futils.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HealCommand implements CommandExecutor, TabCompleter {
     @Override
@@ -40,7 +42,7 @@ public class HealCommand implements CommandExecutor, TabCompleter {
     }
 
     private void healPlayer(Player player) {
-        player.setHealth(20d);
+        player.setHealth(Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
         player.setFoodLevel(20);
         player.setSaturation(20);
     }
