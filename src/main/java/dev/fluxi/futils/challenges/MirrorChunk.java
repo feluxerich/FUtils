@@ -5,6 +5,7 @@ import dev.fluxi.futils.inventory.items.Toggleable;
 import dev.fluxi.futils.utils.Base64;
 import dev.fluxi.futils.utils.BlockUtils;
 import dev.fluxi.futils.utils.ChallengeUtils;
+import dev.fluxi.futils.utils.ConfigUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
@@ -74,7 +75,7 @@ public class MirrorChunk extends Toggleable {
     }
 
     private List<Chunk> getSurroundingChunks(Chunk chunk) {
-        int radius = 8;
+        int radius = 5;
         List<Chunk> chunks = new ArrayList<>();
         for (int x = -radius; x < radius; x++) {
             for (int z = -radius; z < radius; z++) {
@@ -91,18 +92,14 @@ public class MirrorChunk extends Toggleable {
         readConfig();
     }
 
-    @Override
     public void writeConfig() {
-        super.writeConfig();
-        ConfigurationSection section = getConfigSection();
+        ConfigurationSection section = ConfigUtils.getConfigSection(config);
         section.set("block-changes", Base64.serializeAndEncode(blockChanges));
         FUtils.getInstance().saveConfig();
     }
 
-    @Override
     public void readConfig() {
-        super.readConfig();
-        ConfigurationSection section = getConfigSection();
+        ConfigurationSection section = ConfigUtils.getConfigSection(config);
         if (!section.isSet("block-changes")) {
             return;
         }

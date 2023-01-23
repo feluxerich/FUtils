@@ -9,18 +9,26 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
+        if (!FUtils.getInstance().getTimer().running() && !FUtils.getInstance().getInventoryManager().containsPlayer(event.getPlayer())) {
+            FUtils.getInstance().getInventoryManager().overridePlayerInventory(event.getPlayer());
+        }
         if (!event.getPlayer().isOp()) {
             return;
         }
         event.getPlayer().sendMessage(
                 Component.text("This Plugin is still under hard development.", Style.style(NamedTextColor.LIGHT_PURPLE))
         );
-        if (!FUtils.getInstance().getTimer().running() && !FUtils.getInstance().getInventoryManager().containsPlayer(event.getPlayer())) {
-            FUtils.getInstance().getInventoryManager().overridePlayerInventory(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        if (FUtils.getInstance().getInventoryManager().containsPlayer(event.getPlayer())) {
+            FUtils.getInstance().getInventoryManager().removePlayer(event.getPlayer());
         }
     }
 

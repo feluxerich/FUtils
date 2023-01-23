@@ -5,11 +5,14 @@ import dev.fluxi.futils.inventory.guis.MainMenu;
 import dev.fluxi.futils.inventory.guis.TimerMenu;
 import dev.fluxi.futils.inventory.items.Item;
 import dev.fluxi.futils.inventory.guis.SpectatorCompassMenu;
+import dev.fluxi.futils.utils.Base64;
+import dev.fluxi.futils.utils.ConfigUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.*;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,6 +30,7 @@ public class InventoryManager implements Listener {
 
     public InventoryManager() {
         FUtils.getInstance().registerEvent(this);
+        readConfig();
     }
 
     public boolean containsPlayer(Player player) {
@@ -36,6 +40,7 @@ public class InventoryManager implements Listener {
     public void overridePlayerInventory(Player player) {
         inventoryMap.put(player, player.getInventory().getContents());
         player.getInventory().clear();
+        writeConfig();
         if (!player.isOp()) {
             return;
         }
@@ -67,6 +72,7 @@ public class InventoryManager implements Listener {
             player.getInventory().setContents(inventoryMap.get(player));
         }
         inventoryMap.remove(player);
+        writeConfig();
     }
 
     @EventHandler
@@ -95,5 +101,21 @@ public class InventoryManager implements Listener {
             return;
         }
         overridePlayerInventory(event.getPlayer());
+    }
+
+    public void writeConfig() {
+        ConfigurationSection section = ConfigUtils.getConfigSection("inventory");
+        for (Map.Entry<Player, ItemStack[]> entry : inventoryMap.entrySet()) {
+            section.set(entry.getKey().getName(), Base64.serializeAndEncode(entry.getValue()));
+        }
+        FUtils.getInstance().saveConfig();
+    }
+
+    public void readConfig() {
+        ConfigurationSection section = ConfigUtils.getConfigSection("inventory");
+        for (String playerName : section.getKeys(false)) {
+            Player player = (Player) Bukkit.getOfflinePlayer(playerName);
+            inventoryMap.put(player, (ItemStack[]) Base64.deserializeAndDecode((String) section.get(playerName)));
+        }
     }
 }
