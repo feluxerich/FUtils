@@ -14,7 +14,7 @@ public class IcePlatform extends Toggleable {
     private boolean active = false;
 
     public IcePlatform() {
-        super(Material.BLUE_ICE, coloredComponent("Ice Platform"));
+        super(Material.BLUE_ICE, coloredComponent("Ice Platform"), "ice-platform");
     }
 
     @EventHandler

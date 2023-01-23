@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 
 public class NoExp extends Toggleable {
     public NoExp() {
-        super(Material.EXPERIENCE_BOTTLE, coloredComponent("No Experience"));
+        super(Material.EXPERIENCE_BOTTLE, coloredComponent("No Experience"), "no-experience");
     }
 
     @EventHandler

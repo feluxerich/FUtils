@@ -10,7 +10,7 @@ import org.bukkit.util.Vector;
 
 public class PickupItemAirLaunch extends Toggleable {
     public PickupItemAirLaunch() {
-        super(Material.DROPPER, coloredComponent("Pickup Item Air Launch"));
+        super(Material.DROPPER, coloredComponent("Pickup Item Air Launch"), "pickup-item-air-launch");
     }
 
     @EventHandler

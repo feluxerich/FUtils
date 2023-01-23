@@ -21,7 +21,7 @@ public class MirrorChunk extends Toggleable {
     private final Map<Location, Material> blockChanges = new HashMap<>();
 
     public MirrorChunk() {
-        super(Material.TINTED_GLASS, coloredComponent("Mirror Chunk"));
+        super(Material.TINTED_GLASS, coloredComponent("Mirror Chunk"), "mirror-chunk");
     }
 
     @EventHandler
@@ -51,7 +51,7 @@ public class MirrorChunk extends Toggleable {
     }
 
     private void syncChunks() {
-        Bukkit.getScheduler().runTask(FUtils.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(FUtils.getInstance(), () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 for (Chunk chunk : getSurroundingChunks(player.getChunk())) {
                     updateChunk(chunk);

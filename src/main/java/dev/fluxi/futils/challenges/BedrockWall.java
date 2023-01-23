@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class BedrockWall extends Toggleable {
     public BedrockWall() {
-        super(Material.BEDROCK, coloredComponent("Bedrock Wall"));
+        super(Material.BEDROCK, coloredComponent("Bedrock Wall"), "bedrock-wall");
     }
 
     @EventHandler

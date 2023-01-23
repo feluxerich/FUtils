@@ -9,7 +9,7 @@ import org.bukkit.util.Vector;
 
 public class FoodAirLaunch extends Toggleable {
     public FoodAirLaunch() {
-        super(Material.GOLDEN_CARROT, coloredComponent("Food Air Launch"));
+        super(Material.GOLDEN_CARROT, coloredComponent("Food Air Launch"), "food-air-launch");
     }
 
     @EventHandler

@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class BlockBreakVoid extends Toggleable {
     public BlockBreakVoid() {
-        super(Material.NETHERITE_PICKAXE, coloredComponent("Block Break Void"));
+        super(Material.NETHERITE_PICKAXE, coloredComponent("Block Break Void"), "block-break-void");
     }
 
     @EventHandler

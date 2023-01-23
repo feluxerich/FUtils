@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class OnlyDown extends Toggleable {
     public OnlyDown() {
-        super(Material.DEEPSLATE_COAL_ORE, coloredComponent("Only Down"));
+        super(Material.DEEPSLATE_COAL_ORE, coloredComponent("Only Down"), "only-down");
     }
 
     @EventHandler

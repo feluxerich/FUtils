@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class FloorIsLava extends Toggleable {
     public FloorIsLava() {
-        super(Material.MAGMA_BLOCK, coloredComponent("Floor is Lava"));
+        super(Material.MAGMA_BLOCK, coloredComponent("Floor is Lava"), "floor-is-lava");
     }
 
     @EventHandler

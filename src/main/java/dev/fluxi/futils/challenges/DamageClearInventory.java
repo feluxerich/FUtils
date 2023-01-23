@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class DamageClearInventory extends Toggleable {
     public DamageClearInventory() {
-        super(Material.ENDER_CHEST, coloredComponent("Damage Clear Inventory"));
+        super(Material.ENDER_CHEST, coloredComponent("Damage Clear Inventory"), "damage-clear-inventory");
     }
 
     @EventHandler

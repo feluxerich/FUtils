@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 
 public class FallingBlocks extends Toggleable {
     public FallingBlocks() {
-        super(Material.SAND, coloredComponent("Falling Blocks"));
+        super(Material.SAND, coloredComponent("Falling Blocks"), "falling-blocks");
     }
 
     @EventHandler
