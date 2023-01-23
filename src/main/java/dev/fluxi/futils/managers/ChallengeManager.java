@@ -1,9 +1,6 @@
 package dev.fluxi.futils.managers;
 
-import dev.fluxi.futils.challenges.BlockBreakVoid;
-import dev.fluxi.futils.challenges.DamageClearInventory;
-import dev.fluxi.futils.challenges.FallingBlocks;
-import dev.fluxi.futils.challenges.IcePlatform;
+import dev.fluxi.futils.challenges.*;
 import dev.fluxi.futils.inventory.items.Item;
 import dev.fluxi.futils.inventory.items.Toggleable;
 
@@ -18,6 +15,7 @@ public class ChallengeManager {
         challenges.add(new DamageClearInventory());
         challenges.add(new FallingBlocks());
         challenges.add(new IcePlatform());
+        challenges.add(new FloorIsLava());
     }
 
     public List<Item> getChallenges() {
