@@ -2,10 +2,12 @@ package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.utils.Base64;
 import dev.fluxi.futils.utils.BlockUtils;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -18,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MirrorChunk extends Toggleable {
-    private final Map<Location, Material> blockChanges = new HashMap<>();
+    private Map<Location, Material> blockChanges = new HashMap<>();
 
     public MirrorChunk() {
         super(Material.TINTED_GLASS, coloredComponent("Mirror Chunk"), "mirror-chunk");
@@ -29,8 +31,10 @@ public class MirrorChunk extends Toggleable {
         if (!ChallengeUtils.shouldExecute(event.getPlayer())) {
             return;
         }
+        setVariablesFromConfigIfAbsent();
         blockChanges.put(BlockUtils.getInChunkCoordinates(event.getBlockPlaced().getLocation()), event.getBlockPlaced().getType());
         syncChunks();
+        writeConfig();
     }
 
     @EventHandler
@@ -38,8 +42,10 @@ public class MirrorChunk extends Toggleable {
         if (!ChallengeUtils.shouldExecute(event.getPlayer())) {
             return;
         }
+        setVariablesFromConfigIfAbsent();
         blockChanges.put(BlockUtils.getInChunkCoordinates(event.getBlock().getLocation()), Material.AIR);
         syncChunks();
+        writeConfig();
     }
 
     @EventHandler
@@ -47,17 +53,16 @@ public class MirrorChunk extends Toggleable {
         if (!FUtils.getInstance().getTimer().running() || event.getFrom().getChunk() == event.getTo().getChunk()) {
             return;
         }
+        setVariablesFromConfigIfAbsent();
         syncChunks();
     }
 
     private void syncChunks() {
-        Bukkit.getScheduler().runTaskAsynchronously(FUtils.getInstance(), () -> {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                for (Chunk chunk : getSurroundingChunks(player.getChunk())) {
-                    updateChunk(chunk);
-                }
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            for (Chunk chunk : getSurroundingChunks(player.getChunk())) {
+                updateChunk(chunk);
             }
-        });
+        }
     }
 
     private void updateChunk(Chunk chunk) {
@@ -77,5 +82,30 @@ public class MirrorChunk extends Toggleable {
             }
         }
         return chunks;
+    }
+
+    private void setVariablesFromConfigIfAbsent() {
+        if (!blockChanges.isEmpty()) {
+            return;
+        }
+        readConfig();
+    }
+
+    @Override
+    public void writeConfig() {
+        super.writeConfig();
+        ConfigurationSection section = getConfigSection();
+        section.set("block-changes", Base64.serializeAndEncode(blockChanges));
+        FUtils.getInstance().saveConfig();
+    }
+
+    @Override
+    public void readConfig() {
+        super.readConfig();
+        ConfigurationSection section = getConfigSection();
+        if (!section.isSet("block-changes")) {
+            return;
+        }
+        blockChanges = (Map<Location, Material>) Base64.deserializeAndDecode(section.getString("block-changes"));
     }
 }

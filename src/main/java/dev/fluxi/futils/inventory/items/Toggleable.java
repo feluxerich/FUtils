@@ -26,7 +26,6 @@ public class Toggleable extends Item implements Listener {
             enable();
         }
         active = !active;
-        writeConfig();
     }
 
     public void enable() {
@@ -44,16 +43,14 @@ public class Toggleable extends Item implements Listener {
         toggle();
     }
 
-    private ConfigurationSection getConfigSection() {
+    public ConfigurationSection getConfigSection() {
         if (!FUtils.getInstance().getConfig().isConfigurationSection(config)) {
             return FUtils.getInstance().getConfig().createSection(config);
         }
         return FUtils.getInstance().getConfig().getConfigurationSection(config);
     }
 
-    private void writeConfig() {
-        ConfigurationSection section = getConfigSection();
-        section.set("active", active);
-        FUtils.getInstance().saveConfig();
-    }
+    public void readConfig() {}
+
+    public void writeConfig() {}
 }
