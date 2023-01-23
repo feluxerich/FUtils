@@ -19,6 +19,7 @@ public class ChallengeManager {
         challenges.add(new BedrockWall());
         challenges.add(new OnlyDown());
         challenges.add(new NoExp());
+        challenges.add(new FoodAirLaunch());
     }
 
     public List<Item> getChallenges() {

@@ -1,0 +1,22 @@
+package dev.fluxi.futils.challenges;
+
+import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.utils.ChallengeUtils;
+import org.bukkit.Material;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.util.Vector;
+
+public class FoodAirLaunch extends Toggleable {
+    public FoodAirLaunch() {
+        super(Material.GOLDEN_CARROT, coloredComponent("Food Air Launch"));
+    }
+
+    @EventHandler
+    public void onPlayerConsumeItem(PlayerItemConsumeEvent event) {
+        if (!ChallengeUtils.shouldExecute(event.getPlayer())) {
+            return;
+        }
+        event.getPlayer().setVelocity(new Vector(0, 3.7, 0));
+    }
+}
