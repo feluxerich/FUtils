@@ -15,6 +15,6 @@ public class AdvancementDamage extends Toggleable {
         if (event.getAdvancement().getKey().toString().contains(":recipes/")) {
             return;
         }
-        event.getPlayer().damage(2);
+        event.getPlayer().damage(1);
     }
 }
