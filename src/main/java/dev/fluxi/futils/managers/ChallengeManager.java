@@ -20,6 +20,7 @@ public class ChallengeManager {
         challenges.add(new OnlyDown());
         challenges.add(new NoExp());
         challenges.add(new FoodAirLaunch());
+        challenges.add(new PickupItemAirLaunch());
     }
 
     public List<Item> getChallenges() {
