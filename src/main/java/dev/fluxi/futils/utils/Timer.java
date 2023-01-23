@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -117,6 +118,9 @@ public class Timer {
             public void run() {
                 sendActionBar();
                 if (!running()) {
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        player.playEffect(player.getLocation(), Effect.ENDER_SIGNAL, null);
+                    }
                     return;
                 }
                 if (ascending) {
@@ -125,7 +129,7 @@ public class Timer {
                     time(time() - 1);
                 }
             }
-        }.runTaskTimerAsynchronously(FUtils.getInstance(), 20, 20);
+        }.runTaskTimer(FUtils.getInstance(), 20, 20);
     }
 
     public String prettifyTime() {
