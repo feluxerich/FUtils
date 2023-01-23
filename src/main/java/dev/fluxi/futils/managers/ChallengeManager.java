@@ -21,6 +21,7 @@ public class ChallengeManager {
         challenges.add(new NoExp());
         challenges.add(new FoodAirLaunch());
         challenges.add(new PickupItemAirLaunch());
+        challenges.add(new MirrorChunk());
     }
 
     public List<Item> getChallenges() {
