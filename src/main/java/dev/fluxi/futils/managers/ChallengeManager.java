@@ -18,6 +18,7 @@ public class ChallengeManager {
         challenges.add(new FloorIsLava());
         challenges.add(new BedrockWall());
         challenges.add(new OnlyDown());
+        challenges.add(new NoExp());
     }
 
     public List<Item> getChallenges() {

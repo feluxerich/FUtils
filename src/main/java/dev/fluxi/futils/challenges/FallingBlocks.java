@@ -17,7 +17,7 @@ public class FallingBlocks extends Toggleable {
         super(Material.SAND, coloredComponent("Falling Blocks"));
     }
 
-    @EventHandler()
+    @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         if (!ChallengeUtils.shouldExecute(event.getPlayer())) {
             return;
