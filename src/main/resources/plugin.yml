@@ -16,6 +16,8 @@ commands:
     usage: /heal <[player]>
     description: Reset the vitals of yourself or of all players
   timer:
+    aliases:
+      - tt
     permission: futils.timer
     usage: /timer <operation>
     description: Use a timer in players actionbar

@@ -19,6 +19,11 @@ public class TimerCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (label.equalsIgnoreCase("tt")) {
+            fUtils.getTimer().toggle();
+            return true;
+        }
+
         if (args.length == 0) {
             return false;
         }
