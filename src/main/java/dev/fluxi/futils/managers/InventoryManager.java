@@ -70,7 +70,7 @@ public class InventoryManager implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getPlayer().getGameMode() == GameMode.SURVIVAL || event.getAction() != Action.RIGHT_CLICK_AIR) {
+        if (event.getAction() != Action.RIGHT_CLICK_AIR || !containsPlayer(event.getPlayer())) {
             return;
         }
         switch (event.getMaterial()) {
