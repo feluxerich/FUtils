@@ -125,7 +125,7 @@ public class Timer {
                     time(time() - 1);
                 }
             }
-        }.runTaskTimer(FUtils.getInstance(), 20, 20);
+        }.runTaskTimerAsynchronously(FUtils.getInstance(), 20, 20);
     }
 
     public String prettifyTime() {

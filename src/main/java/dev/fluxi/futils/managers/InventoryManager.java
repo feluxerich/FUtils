@@ -9,8 +9,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +17,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +27,7 @@ public class InventoryManager implements Listener {
 
     public InventoryManager() {
         FUtils.getInstance().registerEvent(this);
+        run();
     }
 
     public boolean containsPlayer(Player player) {
@@ -87,5 +88,16 @@ public class InventoryManager implements Listener {
                 break;
         }
         event.setCancelled(true);
+    }
+
+    private void run() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player player : inventoryMap.keySet()) {
+                    player.playEffect(player.getLocation(), Effect.ENDER_SIGNAL, null);
+                }
+            }
+        }.runTaskTimerAsynchronously(FUtils.getInstance(), 0, 20);
     }
 }
