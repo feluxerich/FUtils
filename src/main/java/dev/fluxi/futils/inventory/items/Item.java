@@ -2,8 +2,11 @@ package dev.fluxi.futils.inventory.items;
 
 import dev.fluxi.futils.inventory.BaseInventory;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.Style;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -57,7 +60,7 @@ public class Item {
         this.amount = amount;
     }
 
-    public void onClick(Player clicker) {}
+    public void onClick(InventoryClickEvent event) {}
 
     /**
      * Creates the item defined in this class.
@@ -70,6 +73,10 @@ public class Item {
         return BaseInventory.createItem(material, name, description, amount);
     }
 
+    public static Component coloredComponent(String name) {
+        return Component.text(name, Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false)));
+    }
+
     public Material material() {
         return material;
     }
@@ -80,10 +87,6 @@ public class Item {
 
     public void name(Component name) {
         this.name = name;
-    }
-
-    public List<Component> description() {
-        return description;
     }
 
     public void description(List<Component> description) {
