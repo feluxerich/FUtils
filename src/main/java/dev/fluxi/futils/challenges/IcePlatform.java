@@ -2,6 +2,7 @@ package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -18,7 +19,7 @@ public class IcePlatform extends Toggleable {
 
     @EventHandler
     public void onSneak(PlayerToggleSneakEvent event) {
-        if (!FUtils.getInstance().getTimer().running()) {
+        if (!ChallengeUtils.shouldExecute(event.getPlayer())) {
             return;
         }
         if (!event.isSneaking()) {

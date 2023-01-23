@@ -1,7 +1,7 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +14,7 @@ public class DamageClearInventory extends Toggleable {
 
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent event) {
-        if (!FUtils.getInstance().getTimer().running()) {
+        if (!ChallengeUtils.shouldExecute((Player) event.getEntity())) {
             return;
         }
         if (!(event.getEntity() instanceof Player)) {

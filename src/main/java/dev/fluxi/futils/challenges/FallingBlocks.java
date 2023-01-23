@@ -2,6 +2,7 @@ package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,7 +19,7 @@ public class FallingBlocks extends Toggleable {
 
     @EventHandler()
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!FUtils.getInstance().getTimer().running()) {
+        if (!ChallengeUtils.shouldExecute(event.getPlayer())) {
             return;
         }
         Block block = event.getTo().getBlock();
