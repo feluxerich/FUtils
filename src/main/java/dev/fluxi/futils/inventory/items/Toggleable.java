@@ -21,21 +21,21 @@ public class Toggleable extends Item implements Listener {
 
     protected void toggle() {
         if (active) {
-            FUtils.getInstance().unregisterEvent(this);
-            description(new ArrayList<>());
+            disable();
         } else {
-            FUtils.getInstance().registerEvent(this);
-            description(Collections.singletonList(Component.text("Enabled")));
+            enable();
         }
         active = !active;
     }
 
-    protected void enable() {
-
+    public void enable() {
+        FUtils.getInstance().registerEvent(this);
+        description(Collections.singletonList(Component.text("Enabled")));
     }
 
-    protected void disable() {
-        
+    public void disable() {
+        FUtils.getInstance().unregisterEvent(this);
+        description(new ArrayList<>());
     }
 
     public static Component coloredComponent(String name) {
