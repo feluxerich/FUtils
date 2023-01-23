@@ -1,6 +1,6 @@
 package dev.fluxi.futils.settings;
 
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.settings.utils.ToggleableSetting;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class OldPvP extends Toggleable {
+public class OldPvP extends ToggleableSetting {
     public static final double oldAttackSpeed = 32;
     public static final double newAttackSpeed = 4;
 

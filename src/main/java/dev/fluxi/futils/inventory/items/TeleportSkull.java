@@ -1,6 +1,7 @@
 package dev.fluxi.futils.inventory.items;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class TeleportSkull extends Item {
@@ -11,7 +12,7 @@ public class TeleportSkull extends Item {
     }
 
     @Override
-    public void onClick(Player clicker) {
-        clicker.teleport(player.getLocation());
+    public void onClick(InventoryClickEvent event) {
+        event.getWhoClicked().teleport(player.getLocation());
     }
 }

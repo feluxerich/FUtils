@@ -1,11 +1,11 @@
 package dev.fluxi.futils.settings;
 
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.settings.utils.ToggleableSetting;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
-public class AdvancementDamage extends Toggleable {
+public class AdvancementDamage extends ToggleableSetting {
     public AdvancementDamage() {
         super(Material.KNOWLEDGE_BOOK, coloredComponent("Advancement Damage"));
     }

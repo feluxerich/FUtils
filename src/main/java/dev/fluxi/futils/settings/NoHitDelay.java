@@ -1,14 +1,15 @@
 package dev.fluxi.futils.settings;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.settings.utils.ToggleableSetting;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class NoHitDelay extends Toggleable {
+public class NoHitDelay extends ToggleableSetting {
     public NoHitDelay() {
         super(Material.FEATHER, coloredComponent("No Hit Delay"));
     }
@@ -19,5 +20,10 @@ public class NoHitDelay extends Toggleable {
             return;
         }
         Bukkit.getScheduler().runTaskLater(FUtils.getInstance(), () -> ((LivingEntity) event.getEntity()).setNoDamageTicks(0), 1);
+    }
+
+    @Override
+    public void onClick(InventoryClickEvent event) {
+
     }
 }

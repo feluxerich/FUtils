@@ -49,6 +49,6 @@ public class SpectatorCompassMenu extends ScrollMenu {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         super.onInventoryClick(event);
-        items().get(event.getSlot() + scrollIndex).onClick((Player) event.getWhoClicked());
+        items().get(event.getSlot() + scrollIndex).onClick(event);
     }
 }

@@ -1,13 +1,13 @@
 package dev.fluxi.futils.settings;
 
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.settings.utils.ToggleableSetting;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class SharedDamage extends Toggleable {
+public class SharedDamage extends ToggleableSetting {
     public SharedDamage() {
         super(Material.CHAIN, coloredComponent("Shared Damage"));
     }
