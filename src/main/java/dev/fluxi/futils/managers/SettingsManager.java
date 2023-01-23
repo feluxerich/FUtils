@@ -15,6 +15,7 @@ public class SettingsManager {
         settings.add(new NoHitDelay());
         settings.add(new OldPvP());
         settings.add(new SharedDamage());
+        settings.add(new MaxHealth());
     }
 
     public List<Item> getSettings() {
