@@ -16,6 +16,7 @@ public class ChallengeManager {
         challenges.add(new FallingBlocks());
         challenges.add(new IcePlatform());
         challenges.add(new FloorIsLava());
+        challenges.add(new BedrockWall());
     }
 
     public List<Item> getChallenges() {
