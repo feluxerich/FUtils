@@ -1,4 +1,4 @@
-package dev.fluxi.futils.utils;
+package dev.fluxi.futils.utils.misc;
 
 import dev.fluxi.futils.FUtils;
 import net.kyori.adventure.text.Component;

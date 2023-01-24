@@ -6,7 +6,7 @@ import dev.fluxi.futils.listeners.*;
 import dev.fluxi.futils.managers.InventoryManager;
 import dev.fluxi.futils.managers.SettingsManager;
 import dev.fluxi.futils.utils.ExtendedPlugin;
-import dev.fluxi.futils.utils.Timer;
+import dev.fluxi.futils.utils.misc.Timer;
 import dev.fluxi.futils.managers.VanishManager;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;

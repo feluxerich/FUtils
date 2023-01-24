@@ -4,7 +4,7 @@ import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.BaseInventory;
 import dev.fluxi.futils.inventory.items.Item;
 import dev.fluxi.futils.utils.ExtendedPlugin;
-import dev.fluxi.futils.utils.Timer;
+import dev.fluxi.futils.utils.misc.Timer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
