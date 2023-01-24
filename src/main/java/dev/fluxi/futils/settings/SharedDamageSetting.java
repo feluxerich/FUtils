@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class SharedDamageSetting extends ToggleableSetting {
     public SharedDamageSetting() {
-        super(Material.CHAIN, coloredComponent("Shared Damage"));
+        super(Material.CHAIN, coloredComponent("Shared Damage"), "shared-damage");
     }
 
     @EventHandler

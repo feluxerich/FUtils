@@ -11,7 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class NoHitDelaySetting extends ToggleableSetting {
     public NoHitDelaySetting() {
-        super(Material.FEATHER, coloredComponent("No Hit Delay"));
+        super(Material.FEATHER, coloredComponent("No Hit Delay"), "no-hit-delay");
     }
 
     @EventHandler()

@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
 public class AdvancementDamageSetting extends ToggleableSetting {
     public AdvancementDamageSetting() {
-        super(Material.KNOWLEDGE_BOOK, coloredComponent("Advancement Damage"));
+        super(Material.KNOWLEDGE_BOOK, coloredComponent("Advancement Damage"), "advancement-damage");
     }
 
     @EventHandler

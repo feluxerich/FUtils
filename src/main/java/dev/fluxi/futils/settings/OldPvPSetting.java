@@ -15,7 +15,7 @@ public class OldPvPSetting extends ToggleableSetting {
     public static final double newAttackSpeed = 4;
 
     public OldPvPSetting() {
-        super(Material.DIAMOND_SWORD, coloredComponent("Old PvP"));
+        super(Material.DIAMOND_SWORD, coloredComponent("Old PvP"), "old-pvp");
     }
 
     @EventHandler

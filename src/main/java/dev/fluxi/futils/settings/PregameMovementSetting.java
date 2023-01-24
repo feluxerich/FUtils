@@ -9,8 +9,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PregameMovementSetting extends ToggleableSetting {
     public PregameMovementSetting() {
-        super(Material.ICE, coloredComponent("Pregame Movement"));
-        active(true);
+        super(Material.ICE, coloredComponent("Pregame Movement"), "pregame-movement");
     }
 
     @EventHandler
