@@ -73,7 +73,7 @@ public class MirrorChunk extends Toggleable {
         for (Location location : blockChanges.keySet()) {
             Block block = BlockUtils.getBlockInChunk(chunk, location);
             Material material = blockChanges.get(location);
-            block.setType(material, true);
+            block.setType(material, false);
         }
     }
 
