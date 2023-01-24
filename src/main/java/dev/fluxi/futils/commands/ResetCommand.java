@@ -14,8 +14,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ResetCommand implements CommandExecutor, TabCompleter {
     @Override
@@ -24,15 +25,19 @@ public class ResetCommand implements CommandExecutor, TabCompleter {
             sender.sendMessage(ChatColor.RED + "Confirm with: /reset confirm");
             return true;
         }
-        if (!args[0].equals("confirm")) {
-            return false;
+        if (args[0].equals("config")) {
+            for (String entry : FUtils.getInstance().getConfig().getKeys(false)) {
+                FUtils.getInstance().getConfig().set(entry, null);
+            }
+            FUtils.getInstance().saveConfig();
+            sender.sendMessage(ChatColor.RED + "Reset of the config successful");
+            return true;
         }
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.kick(Component.text("Server resetting")
                     .color(TextColor.fromHexString("#ef4444"))
                     .toBuilder().build());
         }
-
         FUtils.getInstance().getConfig().set("reset", true);
         FUtils.getInstance().saveConfig();
 
@@ -47,6 +52,6 @@ public class ResetCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        return Collections.singletonList("confirm");
+        return Stream.of("confirm", "config").filter(suggestion -> suggestion.startsWith(args[0])).collect(Collectors.toList());
     }
 }
