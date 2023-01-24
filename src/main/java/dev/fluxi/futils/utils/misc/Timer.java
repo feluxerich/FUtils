@@ -83,11 +83,9 @@ public class Timer {
     public void time(int time) {
         if (time < 0) {
             running(false);
-            setConfig();
             return;
         }
         this.time = time;
-        setConfig();
     }
 
     public void sendActionBar() {
