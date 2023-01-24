@@ -12,10 +12,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Arrays;
 
-public class MaxHealth extends Setting {
+public class MaxHealthSetting extends Setting {
     private double hearts = 20;
 
-    public MaxHealth() {
+    public MaxHealthSetting() {
         super(Material.HEART_OF_THE_SEA, coloredComponent("Max Health"), Arrays.asList(
                 coloredComponent("Left click >> +1 ♥"),
                 coloredComponent("Right click >> -1 ♥"),

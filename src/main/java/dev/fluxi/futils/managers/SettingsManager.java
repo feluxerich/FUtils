@@ -11,11 +11,11 @@ public class SettingsManager {
     private final List<Setting> settings = new ArrayList<>();
 
     public SettingsManager() {
-        settings.add(new AdvancementDamage());
-        settings.add(new NoHitDelay());
-        settings.add(new OldPvP());
-        settings.add(new SharedDamage());
-        settings.add(new MaxHealth());
+        settings.add(new AdvancementDamageSetting());
+        settings.add(new NoHitDelaySetting());
+        settings.add(new OldPvPSetting());
+        settings.add(new SharedDamageSetting());
+        settings.add(new MaxHealthSetting());
     }
 
     public List<Item> getSettings() {

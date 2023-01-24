@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class SharedDamage extends ToggleableSetting {
-    public SharedDamage() {
+public class SharedDamageSetting extends ToggleableSetting {
+    public SharedDamageSetting() {
         super(Material.CHAIN, coloredComponent("Shared Damage"));
     }
 

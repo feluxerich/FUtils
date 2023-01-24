@@ -10,11 +10,11 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class OldPvP extends ToggleableSetting {
+public class OldPvPSetting extends ToggleableSetting {
     public static final double oldAttackSpeed = 32;
     public static final double newAttackSpeed = 4;
 
-    public OldPvP() {
+    public OldPvPSetting() {
         super(Material.DIAMOND_SWORD, coloredComponent("Old PvP"));
     }
 

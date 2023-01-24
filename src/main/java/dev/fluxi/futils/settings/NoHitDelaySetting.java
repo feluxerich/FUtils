@@ -9,8 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class NoHitDelay extends ToggleableSetting {
-    public NoHitDelay() {
+public class NoHitDelaySetting extends ToggleableSetting {
+    public NoHitDelaySetting() {
         super(Material.FEATHER, coloredComponent("No Hit Delay"));
     }
 
