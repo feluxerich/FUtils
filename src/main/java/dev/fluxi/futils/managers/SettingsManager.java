@@ -16,6 +16,7 @@ public class SettingsManager {
         settings.add(new OldPvPSetting());
         settings.add(new SharedDamageSetting());
         settings.add(new MaxHealthSetting());
+        settings.add(new PregameMovementSetting());
     }
 
     public List<Item> getSettings() {
