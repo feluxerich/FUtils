@@ -14,11 +14,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MirrorChunk extends Toggleable {
     private Map<Location, Material> blockChanges = new HashMap<>();
@@ -42,6 +40,11 @@ public class MirrorChunk extends Toggleable {
     public void onBlockBreak(BlockBreakEvent event) {
         if (!ChallengeUtils.shouldExecute(event.getPlayer())) {
             return;
+        }
+        Block block = event.getBlock();
+        World world = block.getWorld();
+        for (ItemStack drop : block.getDrops()) {
+            world.dropItemNaturally(block.getLocation(), drop);
         }
         setVariablesFromConfigIfAbsent();
         blockChanges.put(BlockUtils.getInChunkCoordinates(event.getBlock().getLocation()), Material.AIR);
@@ -70,7 +73,7 @@ public class MirrorChunk extends Toggleable {
         for (Location location : blockChanges.keySet()) {
             Block block = BlockUtils.getBlockInChunk(chunk, location);
             Material material = blockChanges.get(location);
-            block.setType(material, false);
+            block.setType(material, true);
         }
     }
 
@@ -93,14 +96,21 @@ public class MirrorChunk extends Toggleable {
     }
 
     public void writeConfig() {
-        ConfigurationSection section = ConfigUtils.getConfigSection(config);
+        ConfigurationSection section = ConfigUtils.getConfigSection("challenges");
+        if (!section.isSet(config)) {
+            section = section.createSection(config);
+        }
         section.set("block-changes", Base64.serializeAndEncode(blockChanges));
         FUtils.getInstance().saveConfig();
     }
 
     public void readConfig() {
-        ConfigurationSection section = ConfigUtils.getConfigSection(config);
-        if (!section.isSet("block-changes")) {
+        ConfigurationSection section = ConfigUtils.getConfigSection("challenges");
+        if (!section.isConfigurationSection(config)) {
+            return;
+        }
+        section = section.getConfigurationSection(config);
+        if (section == null || !section.isSet("block-changes")) {
             return;
         }
         blockChanges = (Map<Location, Material>) Base64.deserializeAndDecode(section.getString("block-changes"));
