@@ -24,9 +24,10 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class InventoryManager implements Listener {
-    private final Map<Player, ItemStack[]> inventoryMap = new HashMap<>();
+    private final Map<OfflinePlayer, ItemStack[]> inventoryMap = new HashMap<>();
 
     public InventoryManager() {
         FUtils.getInstance().registerEvent(this);
@@ -105,8 +106,8 @@ public class InventoryManager implements Listener {
 
     public void writeConfig() {
         ConfigurationSection section = ConfigUtils.getConfigSection("inventory");
-        for (Map.Entry<Player, ItemStack[]> entry : inventoryMap.entrySet()) {
-            section.set(entry.getKey().getName(), Base64.serializeAndEncode(entry.getValue()));
+        for (Map.Entry<OfflinePlayer, ItemStack[]> entry : inventoryMap.entrySet()) {
+            section.set(Objects.requireNonNull(entry.getKey().getName()), Base64.serializeAndEncode(entry.getValue()));
         }
         FUtils.getInstance().saveConfig();
     }
@@ -114,7 +115,7 @@ public class InventoryManager implements Listener {
     public void readConfig() {
         ConfigurationSection section = ConfigUtils.getConfigSection("inventory");
         for (String playerName : section.getKeys(false)) {
-            Player player = (Player) Bukkit.getOfflinePlayer(playerName);
+            OfflinePlayer player = Bukkit.getOfflinePlayer(playerName);
             inventoryMap.put(player, (ItemStack[]) Base64.deserializeAndDecode((String) section.get(playerName)));
         }
     }
