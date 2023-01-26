@@ -10,7 +10,7 @@ public class RandomUtils {
         Random random = new Random();
         return random.nextInt(max);
     }
-    
+
     public static PotionEffectType randomEffectType() {
         int randomEffectIndex = RandomUtils.random(PotionEffectType.values().length);
         return Arrays.asList(PotionEffectType.values()).get(randomEffectIndex);
