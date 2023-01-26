@@ -35,12 +35,14 @@ public class ToggleableSetting extends Setting {
     }
 
     public void enable() {
+        FUtils.getInstance().registerEvent(this);
         active(true);
         writeConfig();
         updateDescription();
     }
 
     public void disable() {
+        FUtils.getInstance().unregisterEvent(this);
         active(false);
         writeConfig();
         updateDescription();
