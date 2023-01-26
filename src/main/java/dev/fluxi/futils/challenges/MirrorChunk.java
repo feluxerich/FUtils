@@ -78,10 +78,10 @@ public class MirrorChunk extends Toggleable {
     }
 
     private List<Chunk> getSurroundingChunks(Chunk chunk) {
-        int radius = 5;
+        int radius = 2;
         List<Chunk> chunks = new ArrayList<>();
-        for (int x = -radius; x < radius; x++) {
-            for (int z = -radius; z < radius; z++) {
+        for (int x = -radius; x < radius + 1; x++) {
+            for (int z = -radius; z < radius + 1; z++) {
                 chunks.add(chunk.getWorld().getChunkAt(chunk.getX() + x, chunk.getZ() + z));
             }
         }
