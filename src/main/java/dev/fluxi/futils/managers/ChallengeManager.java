@@ -22,6 +22,7 @@ public class ChallengeManager {
         challenges.add(new FoodAirLaunch());
         challenges.add(new PickupItemAirLaunch());
         challenges.add(new MirrorChunk());
+        challenges.add(new ChunkEffect());
     }
 
     public List<Item> getChallenges() {
