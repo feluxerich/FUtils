@@ -74,6 +74,11 @@ public class Item {
     }
 
     public static Component coloredComponent(String name) {
+        return Component.text(name, Style.style(TextColor.fromHexString("#5b45ff"), TextDecoration.ITALIC.withState(false)));
+    }
+
+    public static Component coloredComponent(String name, boolean description) {
+        if (!description) return coloredComponent(name);
         return Component.text(name, Style.style(TextColor.fromHexString("#7866ff"), TextDecoration.ITALIC.withState(false)));
     }
 
