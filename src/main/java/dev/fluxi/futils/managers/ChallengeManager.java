@@ -23,6 +23,7 @@ public class ChallengeManager {
         challenges.add(new PickupItemAirLaunch());
         challenges.add(new MirrorChunk());
         challenges.add(new ChunkEffect());
+        challenges.add(new BiomeEffect());
     }
 
     public List<Item> getChallenges() {
