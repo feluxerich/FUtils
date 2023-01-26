@@ -20,7 +20,7 @@ public class FloorIsLava extends Toggleable {
         if (!ChallengeUtils.shouldExecute(event.getPlayer())) {
             return;
         }
-        Block block = BlockUtils.getBlockBelow(event.getTo().getBlock().getLocation());
+        Block block = BlockUtils.getBelow(event.getTo().getBlock().getLocation()).getBlock();
         if (block.isLiquid() || BlockUtils.isAir(block) || !block.isSolid()) {
             return;
         }
