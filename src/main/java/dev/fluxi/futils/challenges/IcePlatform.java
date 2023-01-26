@@ -6,12 +6,16 @@ import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IcePlatform extends Toggleable {
-    private boolean active = false;
+    private final List<Player> activeList = new ArrayList<>();
 
     public IcePlatform() {
         super(Material.BLUE_ICE, coloredComponent("Ice Platform"), "ice-platform");
@@ -25,12 +29,12 @@ public class IcePlatform extends Toggleable {
         if (!event.isSneaking()) {
             return;
         }
-        active = !active;
+        togglePlayerActive(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!FUtils.getInstance().getTimer().running() || !active) {
+        if (!FUtils.getInstance().getTimer().running() || !active(event.getPlayer())) {
             return;
         }
         Block block = event.getTo().getBlock();
@@ -47,5 +51,17 @@ public class IcePlatform extends Toggleable {
                 location.getWorld().getBlockAt(x, location.getBlockY(), z).setType(Material.BLUE_ICE);
             }
         }
+    }
+
+    private void togglePlayerActive(Player player) {
+        if (activeList.contains(player)) {
+            activeList.remove(player);
+            return;
+        }
+        activeList.add(player);
+    }
+
+    private boolean active(Player player) {
+        return activeList.contains(player);
     }
 }
