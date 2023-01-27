@@ -18,6 +18,7 @@ public class SettingsManager {
         settings.add(new MaxHealthSetting());
         settings.add(new PregameMovementSetting());
         settings.add(new NoFallDamageSetting());
+        settings.add(new GoalSetting());
     }
 
     public List<Item> getSettings() {
