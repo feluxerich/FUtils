@@ -17,9 +17,9 @@ public class MaxHealthSetting extends Setting {
 
     public MaxHealthSetting() {
         super(Material.HEART_OF_THE_SEA, coloredComponent("Max Health"), Arrays.asList(
-                coloredComponent("Left click >> +1 ♥"),
-                coloredComponent("Right click >> -1 ♥"),
-                coloredComponent("Shift click >> reset")
+                coloredComponent("Left click >> +1 ♥", true),
+                coloredComponent("Right click >> -1 ♥", true),
+                coloredComponent("Shift click >> reset", true)
         ));
     }
 
