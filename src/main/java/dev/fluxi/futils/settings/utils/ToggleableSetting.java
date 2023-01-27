@@ -71,6 +71,6 @@ public class ToggleableSetting extends Setting {
     }
 
     private void updateDescription() {
-        description(Collections.singletonList(coloredComponent(active() ? "Enabled" : "Disabled")));
+        description(Collections.singletonList(coloredComponent(active() ? "Enabled" : "Disabled", true)));
     }
 }
