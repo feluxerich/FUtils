@@ -11,17 +11,13 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class BlockListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (!FUtils.getInstance().getInventoryManager().containsPlayer(event.getPlayer())) {
-            return;
-        }
+        if (FUtils.getInstance().getTimer().running()) return;
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onBlockDestroy(BlockBreakEvent event) {
-        if (!FUtils.getInstance().getInventoryManager().containsPlayer(event.getPlayer())) {
-            return;
-        }
+        if (FUtils.getInstance().getTimer().running()) return;
         event.setCancelled(true);
     }
 
