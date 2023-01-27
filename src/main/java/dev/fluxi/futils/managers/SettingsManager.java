@@ -17,6 +17,7 @@ public class SettingsManager {
         settings.add(new SharedDamageSetting());
         settings.add(new MaxHealthSetting());
         settings.add(new PregameMovementSetting());
+        settings.add(new NoFallDamageSetting());
     }
 
     public List<Item> getSettings() {
