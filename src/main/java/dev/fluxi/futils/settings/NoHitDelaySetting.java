@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class NoHitDelaySetting extends ToggleableSetting {
     public NoHitDelaySetting() {
@@ -20,10 +19,5 @@ public class NoHitDelaySetting extends ToggleableSetting {
             return;
         }
         Bukkit.getScheduler().runTaskLater(FUtils.getInstance(), () -> ((LivingEntity) event.getEntity()).setNoDamageTicks(0), 1);
-    }
-
-    @Override
-    public void onClick(InventoryClickEvent event) {
-
     }
 }
