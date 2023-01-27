@@ -31,8 +31,9 @@ public class PlayerListener implements Listener {
         if (FUtils.getInstance().getInventoryManager().containsPlayer(event.getPlayer())) {
             FUtils.getInstance().getInventoryManager().removePlayer(event.getPlayer());
         }
-        if (Bukkit.getServer().getOnlinePlayers().size() > 0) return;
-        FUtils.getInstance().getTimer().running(false);
+        Bukkit.getScheduler().runTaskLater(FUtils.getInstance(), () -> {
+            if (Bukkit.getOnlinePlayers().size() > 0) FUtils.getInstance().getTimer().running(false);
+        }, 1);
     }
 
     @EventHandler
