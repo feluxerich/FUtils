@@ -78,9 +78,7 @@ public class InventoryManager implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getAction() != Action.RIGHT_CLICK_AIR || !containsPlayer(event.getPlayer())) {
-            return;
-        }
+        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK || !containsPlayer(event.getPlayer())) return;
         switch (event.getMaterial()) {
             case COMPASS:
                 event.getPlayer().openInventory(new SpectatorCompassMenu().inventory());

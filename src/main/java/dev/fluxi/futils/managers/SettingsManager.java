@@ -19,6 +19,8 @@ public class SettingsManager {
         settings.add(new PregameMovementSetting());
         settings.add(new NoFallDamageSetting());
         settings.add(new GoalSetting());
+        settings.add(new NoHungerSetting());
+        settings.add(new SoupSetting());
     }
 
     public List<Item> getSettings() {
