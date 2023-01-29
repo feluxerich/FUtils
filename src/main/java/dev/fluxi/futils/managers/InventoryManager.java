@@ -38,13 +38,12 @@ public class InventoryManager implements Listener {
         return inventoryMap.containsKey(player);
     }
 
-    public void overridePlayerInventory(Player player) {
+    public void setManagementInventory(Player player) {
+        if (containsPlayer(player)) return;
         inventoryMap.put(player, player.getInventory().getContents());
         player.getInventory().clear();
         writeConfig();
-        if (!player.isOp()) {
-            return;
-        }
+        if (!player.isOp()) return;
 
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
@@ -67,7 +66,7 @@ public class InventoryManager implements Listener {
         ).item());
     }
 
-    public void removePlayer(Player player) {
+    public void setNormalInventory(Player player) {
         player.getInventory().clear();
         if (containsPlayer(player)) {
             player.getInventory().setContents(inventoryMap.get(player));
@@ -96,13 +95,12 @@ public class InventoryManager implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        if (FUtils.getInstance().getTimer().running()) {
-            return;
-        }
-        overridePlayerInventory(event.getPlayer());
+        if (FUtils.getInstance().getTimer().running()) return;
+        setManagementInventory(event.getPlayer());
     }
 
     public void writeConfig() {
+        ConfigUtils.resetConfigurationPath("inventory");
         ConfigurationSection section = ConfigUtils.getConfigSection("inventory");
         for (Map.Entry<OfflinePlayer, ItemStack[]> entry : inventoryMap.entrySet()) {
             section.set(Objects.requireNonNull(entry.getKey().getName()), Base64.serializeAndEncode(entry.getValue()));

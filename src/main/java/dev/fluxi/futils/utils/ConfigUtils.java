@@ -10,4 +10,8 @@ public class ConfigUtils {
         }
         return FUtils.getInstance().getConfig().getConfigurationSection(path);
     }
+
+    public static void resetConfigurationPath(String path) {
+        FUtils.getInstance().getConfig().set(path, null);
+    }
 }

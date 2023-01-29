@@ -7,7 +7,6 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -17,36 +16,7 @@ public class Timer {
     private boolean ascending = true;
 
     public Timer() {
-        getConfig();
         run();
-    }
-
-    private ConfigurationSection getConfigSection() {
-        if (!FUtils.getInstance().getConfig().isConfigurationSection("timer")) {
-            return FUtils.getInstance().getConfig().createSection("timer");
-        }
-        return FUtils.getInstance().getConfig().getConfigurationSection("timer");
-    }
-
-    private void getConfig() {
-        ConfigurationSection section = getConfigSection();
-        if (section.isSet("time")) {
-            time(section.getInt("time"));
-        }
-        if (section.isSet("running")) {
-            running(section.getBoolean("running"));
-        }
-        if (section.isSet("ascending")) {
-            ascending(section.getBoolean("ascending"));
-        }
-    }
-
-    private void setConfig() {
-        ConfigurationSection section = getConfigSection();
-        section.set("time", time());
-        section.set("running", running());
-        section.set("ascending", ascending());
-        FUtils.getInstance().saveConfig();
     }
 
     public void toggle() {
@@ -63,7 +33,6 @@ public class Timer {
 
     public void ascending(boolean ascending) {
         this.ascending = ascending;
-        setConfig();
     }
 
     public boolean running() {
@@ -71,9 +40,8 @@ public class Timer {
     }
 
     public void running(boolean running) {
-        overridePlayerInventories(running);
         this.running = running;
-        setConfig();
+        overridePlayerInventories();
     }
 
     public int time() {
@@ -88,7 +56,7 @@ public class Timer {
         this.time = time;
     }
 
-    public void sendActionBar() {
+    private void sendActionBar() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (!running()) {
                 player.sendActionBar(
@@ -114,6 +82,7 @@ public class Timer {
         new BukkitRunnable() {
             @Override
             public void run() {
+                if (Bukkit.getOnlinePlayers().size() == 0) running(false);
                 sendActionBar();
                 if (!running()) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
@@ -141,16 +110,13 @@ public class Timer {
         return String.format("%02d:%02d:%02d:%02d", days, hours, minutes, seconds);
     }
 
-    private void overridePlayerInventories(boolean remove) {
+    private void overridePlayerInventories() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (remove) {
-                FUtils.getInstance().getInventoryManager().removePlayer(player);
+            if (running) {
+                FUtils.getInstance().getInventoryManager().setNormalInventory(player);
                 continue;
             }
-            if (FUtils.getInstance().getInventoryManager().containsPlayer(player)) {
-                continue;
-            }
-            FUtils.getInstance().getInventoryManager().overridePlayerInventory(player);
+            FUtils.getInstance().getInventoryManager().setManagementInventory(player);
         }
     }
 }
