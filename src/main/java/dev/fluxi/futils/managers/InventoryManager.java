@@ -5,7 +5,7 @@ import dev.fluxi.futils.inventory.guis.MainMenu;
 import dev.fluxi.futils.inventory.guis.TimerMenu;
 import dev.fluxi.futils.inventory.items.Item;
 import dev.fluxi.futils.inventory.guis.SpectatorCompassMenu;
-import dev.fluxi.futils.utils.Base64;
+import dev.fluxi.futils.utils.misc.Base64;
 import dev.fluxi.futils.utils.ConfigUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;

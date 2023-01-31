@@ -1,4 +1,4 @@
-package dev.fluxi.futils.utils;
+package dev.fluxi.futils.utils.misc;
 
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;

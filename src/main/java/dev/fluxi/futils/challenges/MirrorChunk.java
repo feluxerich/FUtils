@@ -2,7 +2,7 @@ package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
 import dev.fluxi.futils.inventory.items.Toggleable;
-import dev.fluxi.futils.utils.Base64;
+import dev.fluxi.futils.utils.misc.Base64;
 import dev.fluxi.futils.utils.BlockUtils;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import dev.fluxi.futils.utils.ConfigUtils;
