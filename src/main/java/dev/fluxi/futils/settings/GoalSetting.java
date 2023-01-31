@@ -2,10 +2,7 @@ package dev.fluxi.futils.settings;
 
 import dev.fluxi.futils.inventory.guis.PaginatedMenu;
 import dev.fluxi.futils.inventory.items.Item;
-import dev.fluxi.futils.settings.goals.KillBobGoal;
-import dev.fluxi.futils.settings.goals.KillEnderDragonGoal;
-import dev.fluxi.futils.settings.goals.KillWardenGoal;
-import dev.fluxi.futils.settings.goals.KillWitherGoal;
+import dev.fluxi.futils.settings.goals.*;
 import dev.fluxi.futils.settings.utils.Setting;
 import dev.fluxi.futils.settings.utils.ToggleableSetting;
 import net.kyori.adventure.text.Component;
@@ -39,6 +36,7 @@ public class GoalSetting extends Setting {
         goals.add(new KillWitherGoal());
         goals.add(new KillBobGoal());
         goals.add(new KillWardenGoal());
+        goals.add(new KillAllMobsGoal());
     }
 
     private List<Item> getGoals() {
