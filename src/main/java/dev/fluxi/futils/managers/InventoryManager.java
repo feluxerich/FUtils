@@ -67,12 +67,16 @@ public class InventoryManager implements Listener {
     }
 
     public void setNormalInventory(Player player) {
+        setNormalInventory(player, true);
+    }
+
+    public void setNormalInventory(Player player, boolean changeConfig) {
         player.getInventory().clear();
         if (containsPlayer(player)) {
             player.getInventory().setContents(inventoryMap.get(player));
         }
         inventoryMap.remove(player);
-        writeConfig();
+        if (changeConfig) writeConfig();
     }
 
     @EventHandler

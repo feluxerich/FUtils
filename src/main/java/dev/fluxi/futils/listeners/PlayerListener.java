@@ -47,7 +47,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        inventoryManager.setNormalInventory(event.getPlayer());
+        inventoryManager.setNormalInventory(event.getPlayer(), false);
         Bukkit.getScheduler().runTaskLater(FUtils.getInstance(), () -> {
             if (Bukkit.getOnlinePlayers().size() > 0) FUtils.getInstance().getTimer().running(false);
         }, 1);
