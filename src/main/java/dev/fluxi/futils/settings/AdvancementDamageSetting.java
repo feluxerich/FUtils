@@ -11,7 +11,7 @@ public class AdvancementDamageSetting extends ToggleableSetting {
     }
 
     @EventHandler
-    public void onEntityDamage(PlayerAdvancementDoneEvent event) {
+    public void onPlayerAdvancement(PlayerAdvancementDoneEvent event) {
         if (event.getAdvancement().getKey().toString().contains(":recipes/")) {
             return;
         }
