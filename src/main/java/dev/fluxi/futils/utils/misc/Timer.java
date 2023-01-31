@@ -1,6 +1,7 @@
 package dev.fluxi.futils.utils.misc;
 
 import dev.fluxi.futils.FUtils;
+import dev.fluxi.futils.events.TimerSettingsChangeEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
@@ -33,6 +34,7 @@ public class Timer {
 
     public void ascending(boolean ascending) {
         this.ascending = ascending;
+        triggerEvent();
     }
 
     public boolean running() {
@@ -42,6 +44,7 @@ public class Timer {
     public void running(boolean running) {
         this.running = running;
         overridePlayerInventories();
+        triggerEvent();
     }
 
     public int time() {
@@ -54,6 +57,11 @@ public class Timer {
             return;
         }
         this.time = time;
+    }
+
+    public void time(int time, boolean triggerEvent) {
+        time(time);
+        if (triggerEvent) triggerEvent();
     }
 
     private void sendActionBar() {
@@ -118,5 +126,10 @@ public class Timer {
             }
             FUtils.getInstance().getInventoryManager().setManagementInventory(player);
         }
+    }
+
+    private void triggerEvent() {
+        TimerSettingsChangeEvent timerSettingsChangeEvent = new TimerSettingsChangeEvent(running(), ascending(), time());
+        Bukkit.getPluginManager().callEvent(timerSettingsChangeEvent);
     }
 }
