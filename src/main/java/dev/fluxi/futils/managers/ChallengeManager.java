@@ -24,6 +24,7 @@ public class ChallengeManager {
         challenges.add(new MirrorChunk());
         challenges.add(new ChunkEffect());
         challenges.add(new BiomeEffect());
+        challenges.add(new RandomItem());
     }
 
     public List<Item> getChallenges() {
