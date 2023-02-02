@@ -1,12 +1,12 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-public class OnlyDown extends Toggleable {
+public class OnlyDown extends Challenge {
     public OnlyDown() {
         super(Material.DEEPSLATE_COAL_ORE, coloredComponent("Only Down"), "only-down");
     }

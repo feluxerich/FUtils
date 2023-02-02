@@ -1,6 +1,6 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import dev.fluxi.futils.utils.RandomUtils;
 import org.bukkit.Chunk;
@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChunkEffect extends Toggleable {
+public class ChunkEffect extends Challenge {
     private final Map<Chunk, PotionEffectType> effectMap = new HashMap<>();
 
     public ChunkEffect() {

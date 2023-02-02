@@ -1,7 +1,7 @@
 package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IcePlatform extends Toggleable {
+public class IcePlatform extends Challenge {
     private final List<Player> activeList = new ArrayList<>();
 
     public IcePlatform() {

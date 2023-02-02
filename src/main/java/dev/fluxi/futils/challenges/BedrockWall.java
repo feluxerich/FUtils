@@ -1,7 +1,7 @@
 package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -9,7 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-public class BedrockWall extends Toggleable {
+public class BedrockWall extends Challenge {
     public BedrockWall() {
         super(Material.BEDROCK, coloredComponent("Bedrock Wall"), "bedrock-wall");
     }

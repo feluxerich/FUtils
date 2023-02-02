@@ -1,7 +1,7 @@
 package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.utils.BlockUtils;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Bukkit;
@@ -10,7 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-public class FloorIsLava extends Toggleable {
+public class FloorIsLava extends Challenge {
     public FloorIsLava() {
         super(Material.MAGMA_BLOCK, coloredComponent("Floor is Lava"), "floor-is-lava");
     }

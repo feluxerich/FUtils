@@ -1,14 +1,14 @@
 package dev.fluxi.futils.managers;
 
 import dev.fluxi.futils.challenges.*;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.inventory.items.Item;
-import dev.fluxi.futils.inventory.items.Toggleable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChallengeManager {
-    private final List<Toggleable> challenges = new ArrayList<>();
+    private final List<Challenge> challenges = new ArrayList<>();
 
     public ChallengeManager() {
         challenges.add(new BlockBreakVoid());

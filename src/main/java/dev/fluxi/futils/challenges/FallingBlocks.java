@@ -1,7 +1,7 @@
 package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -12,7 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
-public class FallingBlocks extends Toggleable {
+public class FallingBlocks extends Challenge {
     public FallingBlocks() {
         super(Material.SAND, coloredComponent("Falling Blocks"), "falling-blocks");
     }

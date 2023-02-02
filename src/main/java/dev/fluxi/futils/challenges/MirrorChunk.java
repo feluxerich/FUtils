@@ -1,7 +1,7 @@
 package dev.fluxi.futils.challenges;
 
 import dev.fluxi.futils.FUtils;
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.utils.misc.Base64;
 import dev.fluxi.futils.utils.BlockUtils;
 import dev.fluxi.futils.utils.ChallengeUtils;
@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
-public class MirrorChunk extends Toggleable {
+public class MirrorChunk extends Challenge {
     private Map<Location, Material> blockChanges = new HashMap<>();
 
     public MirrorChunk() {
@@ -97,8 +97,8 @@ public class MirrorChunk extends Toggleable {
 
     public void writeConfig() {
         ConfigurationSection section = ConfigUtils.getConfigSection("challenges");
-        if (!section.isSet(config)) {
-            section = section.createSection(config);
+        if (!section.isSet(configName)) {
+            section = section.createSection(configName);
         }
         section.set("block-changes", Base64.serializeAndEncode(blockChanges));
         FUtils.getInstance().saveConfig();
@@ -106,10 +106,10 @@ public class MirrorChunk extends Toggleable {
 
     public void readConfig() {
         ConfigurationSection section = ConfigUtils.getConfigSection("challenges");
-        if (!section.isConfigurationSection(config)) {
+        if (!section.isConfigurationSection(configName)) {
             return;
         }
-        section = section.getConfigurationSection(config);
+        section = section.getConfigurationSection(configName);
         if (section == null || !section.isSet("block-changes")) {
             return;
         }

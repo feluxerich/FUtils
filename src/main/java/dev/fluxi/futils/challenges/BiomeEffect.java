@@ -1,6 +1,6 @@
 package dev.fluxi.futils.challenges;
 
-import dev.fluxi.futils.inventory.items.Toggleable;
+import dev.fluxi.futils.challenges.utils.Challenge;
 import dev.fluxi.futils.utils.ChallengeUtils;
 import dev.fluxi.futils.utils.RandomUtils;
 import org.bukkit.Material;
@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
 
-public class BiomeEffect extends Toggleable {
+public class BiomeEffect extends Challenge {
     private final Map<Biome, PotionEffectType> effectMap = new HashMap<>();
 
     public BiomeEffect() {
