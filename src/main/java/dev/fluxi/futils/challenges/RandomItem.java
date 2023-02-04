@@ -7,6 +7,8 @@ import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class RandomItem extends TimedChallenge {
@@ -30,13 +32,18 @@ public class RandomItem extends TimedChallenge {
     @Override
     public void enable() {
         super.enable();
-        updateBossBar();
+        createBossBar();
     }
 
     @Override
     public void disable() {
         super.disable();
         hideBossBar();
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        createBossBar(event.getPlayer());
     }
 
     private void giveItem() {
@@ -54,7 +61,7 @@ public class RandomItem extends TimedChallenge {
         return new ItemStack(material);
     }
 
-    private void updateBossBar() {
+    private void createBossBar() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             createBossBar(player);
         }
