@@ -14,7 +14,7 @@ public class PregameMovementSetting extends ToggleableSetting {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (event.getPlayer().getGameMode() != GameMode.SURVIVAL || FUtils.getInstance().getTimer().running() || active()) {
+        if (event.getPlayer().getGameMode() != GameMode.SURVIVAL || FUtils.getInstance().getTimer().running()) {
             return;
         }
         event.setCancelled(true);
