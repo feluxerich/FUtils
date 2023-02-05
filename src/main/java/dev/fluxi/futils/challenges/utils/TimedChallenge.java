@@ -17,6 +17,7 @@ public abstract class TimedChallenge extends Challenge {
         new BukkitRunnable() {
             @Override
             public void run() {
+                if (!FUtils.getInstance().getTimer().running() || !active) return;
                 TimedChallenge.this.run();
             }
         }.runTaskTimer(FUtils.getInstance(), delay, period);

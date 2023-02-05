@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public abstract class Challenge extends Item implements Listener {
-    private boolean active = false;
+    protected boolean active = false;
     protected final String configName;
 
     public Challenge(Material material, Component name, String configName) {
